@@ -10,7 +10,7 @@ const MenuItems = ({ children }) => (
 
 const getStarted = () => {
   return Router.push({
-    pathname: "/pre-questions/",
+    pathname: "/pre-questions",
   });
 };
 

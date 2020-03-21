@@ -7,7 +7,7 @@ import PageTitle from "../components/PageTitle";
 
 const getStarted = () => {
   return Router.push({
-    pathname: "/pre-questions/",
+    pathname: "/pre-questions",
   });
 };
 
@@ -70,7 +70,7 @@ export default function Home() {
           margin="auto"
           borderTop="1px solid #EEE"
           borderBottom="1px solid #EEE"
-          px="10"
+          px={{ base: "5", md: "10" }}
           py="10"
         >
           <FlowSegment number="1">Tell us how you're affected</FlowSegment>
