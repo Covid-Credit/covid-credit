@@ -1,9 +1,10 @@
+import io
 import logging
 from urllib.parse import urlencode
 
 from django.core.exceptions import SuspiciousOperation
 from django.db import transaction
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, FileResponse
 from django.conf import settings
 
 from integrations.credit_kudos.api import (
@@ -11,6 +12,8 @@ from integrations.credit_kudos.api import (
     save_access_token,
 )
 
+
+from latex import build_pdf
 
 logger = logging.getLogger(__name__)
 
@@ -37,3 +40,11 @@ def complete_credit_kudos(request):
         save_access_token(user, oauth_payload=oauth_payload)
 
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
+
+def create_pdf(request):
+    min_latex = (r"\documentclass{article}"
+             r"\begin{document}"
+             r"Hello, world!"
+             r"\end{document}")
+    pdf = build_pdf(min_latex)
+    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=True, filename="report.pdf")
