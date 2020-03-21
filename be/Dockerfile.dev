@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-RUN apt-get update && apt-get install -y curl git texlive-xetex texlive-latex-base
+RUN apt-get update && apt-get install -y curl git texlive-xetex texlive-latex-base latexmk
 RUN curl -o /usr/local/bin/watchman "https://storage.googleapis.com/static.fronted.xyz/watchman-eb16f82" -# && chmod +x /usr/local/bin/watchman
 
 ENV APP_HOME /app
