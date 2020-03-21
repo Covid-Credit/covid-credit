@@ -1,0 +1,16 @@
+FROM node:12-slim
+
+WORKDIR /app
+
+COPY fe/package.json ./fe/
+COPY fe/yarn.lock ./fe/
+
+RUN cd fe && yarn install --frozen-lockfile
+
+COPY . ./
+
+RUN cd fe && yarn run build
+
+WORKDIR /app/fe
+
+CMD exec yarn run start

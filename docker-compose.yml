@@ -20,8 +20,6 @@ services:
       - ./be:/app
     ports:
       - "8000:8000"
-    environment:
-      - PUBSUB_EMULATOR_HOST=pubsub:8681
     networks:
       - webnet
     depends_on:

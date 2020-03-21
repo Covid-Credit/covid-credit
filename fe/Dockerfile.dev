@@ -1,0 +1,12 @@
+FROM node:12-slim
+
+WORKDIR /app
+
+COPY package.json ./
+COPY yarn.lock ./
+
+RUN yarn install --frozen-lockfile
+
+COPY . ./
+
+CMD exec yarn run dev
