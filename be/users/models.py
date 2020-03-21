@@ -70,3 +70,14 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
     def clean(self):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email).lower()
+
+
+class CreditKudosProfile(models.Model):
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name="+")
+
+    access_token = models.TextField()
+    token_type = models.TextField()
+    expires_at = models.DateTimeField()
+    refresh_token = models.TextField()
+    scope = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
