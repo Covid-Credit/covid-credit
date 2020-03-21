@@ -14,6 +14,7 @@ google-cloud-pubsub
 graphene==3.0.dev20190817210753
 gunicorn
 httpx
+latex
 phonenumbers
 pip-tools
 psycopg2-binary
