@@ -56,9 +56,15 @@ export default function Home() {
             We want everyone affected to have access to financial help
           </Text>
           <Box textAlign={{ base: "left", sm: "center" }}>
-            <Button variantColor="teal" size="lg" onClick={getStarted}>
+            <Button
+              variantColor="teal"
+              size="lg"
+              disabled={true}
+              onClick={getStarted}
+            >
               Prove my income
             </Button>
+            <Text>(available soon)</Text>
           </Box>
         </Box>
       </Box>
