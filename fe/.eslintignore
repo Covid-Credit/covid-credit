@@ -1,0 +1,4 @@
+!.babelrc.js
+!.eslintrc.js
+/node_modules/*
+/public/*

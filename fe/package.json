@@ -1,0 +1,39 @@
+{
+  "name": "fe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js",
+    "lint": "eslint --ext='.js,.jsx,.ts,.tsx' ."
+  },
+  "dependencies": {
+    "@chakra-ui/core": "^0.6.1",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "babel-eslint": "^10.1.0",
+    "emotion-theming": "^10.0.27",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^4.6.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.3",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "9.3.1",
+    "prettier": "^1.19.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-icons": "^3.9.0"
+  },
+  "prettier": {
+    "trailingComma": "all"
+  }
+}
