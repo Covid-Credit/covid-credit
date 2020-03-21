@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.6
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=covid
+      - POSTGRES_USER=root
+      - POSTGRES_DB=covid-income
+    networks:
+      - webnet
+
+networks:
+  webnet:
