@@ -1,0 +1,13 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: ['-c', 'docker pull --quiet gcr.io/$PROJECT_ID/fe:latest || exit 0']
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+            'build',
+            '-t', 'gcr.io/$PROJECT_ID/fe:latest',
+            '--cache-from', 'gcr.io/$PROJECT_ID/fe:latest',
+            '--file', './Dockerfile.prod',
+            '.'
+        ]
+images: ['gcr.io/$PROJECT_ID/fe:latest']
