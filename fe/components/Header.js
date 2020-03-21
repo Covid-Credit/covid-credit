@@ -1,4 +1,5 @@
 import React from "react";
+import Router from "next/router";
 import { Box, Heading, Flex, Text, Button } from "@chakra-ui/core";
 
 const MenuItems = ({ children }) => (
@@ -6,6 +7,12 @@ const MenuItems = ({ children }) => (
     {children}
   </Text>
 );
+
+const getStarted = () => {
+  return Router.push({
+    pathname: "/pre-questions/",
+  });
+};
 
 const Header = props => {
   const [show, setShow] = React.useState(false);
@@ -55,7 +62,7 @@ const Header = props => {
         display={{ base: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button bg="transparent" border="1px">
+        <Button bg="transparent" border="1px" onClick={getStarted}>
           Prove my Income
         </Button>
       </Box>
