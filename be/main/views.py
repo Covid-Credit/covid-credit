@@ -52,6 +52,17 @@ def create_pdf(request):
         'ni': 'AB123456C',
         'address': '123 Fake Street, N1 2AB',
         'loss_of_income': 'partial',
+        'accounts': [{
+            'name': 'Sam Pull Current Account',
+            'number': '12345678',
+            'sort_code': '12-34-56',
+        }],
+        'standard_occupation_code': '6221', # SOC2020 Hairdresser
+
+        'company': {
+            'name': 'Foo Bar Limited',
+            'number': '11112222',
+        },
     }
     pdf = build_pdf(template.render(context), builder='xelatexmk')
     return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=False, filename="report.pdf")
