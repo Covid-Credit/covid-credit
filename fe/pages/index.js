@@ -23,7 +23,7 @@ export default function Home() {
             textAlign={{ base: "left", sm: "center" }}
             alignSelf="center"
           >
-            We believe everyone affected should have access to financial help
+            We want everyone affected to have access to financial help
           </Text>
         </Box>
       </Box>
