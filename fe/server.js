@@ -1,6 +1,6 @@
 const express = require("express");
 // const proxy = require("http-proxy-middleware");
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const next = require("next");
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -15,10 +15,7 @@ app.prepare().then(() => {
 
   // Google signin urls
   server.use(
-    [
-      "/api/",
-      "/complete/credit-kudos",
-    ],
+    ["/api/", "/complete/credit-kudos"],
     createProxyMiddleware({
       target: BACKEND_DOMAIN,
       changeOrigin: true,
