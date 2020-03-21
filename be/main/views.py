@@ -1,6 +1,7 @@
 import io
 import logging
 import uuid
+import os
 from urllib.parse import urlencode
 
 from django.core.exceptions import SuspiciousOperation
@@ -66,6 +67,8 @@ def create_pdf(request):
             'name': 'Foo Bar Limited',
             'number': '11112222',
         },
+
+        'logo_path': os.path.join(settings.BASE_DIR, 'static/images/creditkudos.png'),
     }
     pdf = build_pdf(template.render(context), builder='xelatexmk')
     storage_client = storage.Client()
