@@ -1,5 +1,4 @@
 __pycache__/
-/static/
 .env
 .mypy_cache/
 .DS_STORE
