@@ -1,5 +1,6 @@
 import io
 import logging
+import uuid
 from urllib.parse import urlencode
 
 from django.core.exceptions import SuspiciousOperation
@@ -7,6 +8,8 @@ from django.db import transaction
 from django.http import HttpResponseRedirect, FileResponse
 from django.conf import settings
 from django.template import loader
+
+from google.cloud import storage
 
 from integrations.credit_kudos.api import (
     exchange_authorisation_code,
@@ -65,4 +68,9 @@ def create_pdf(request):
         },
     }
     pdf = build_pdf(template.render(context), builder='xelatexmk')
+    storage_client = storage.Client()
+    bucket = storage_client.bucket("covid-credit-dev")
+    blob = bucket.blob("reports/%s.pdf" % uuid.uuid4())
+    blob.upload_from_string(bytes(pdf), content_type="application/pdf")
+
     return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=False, filename="report.pdf")
