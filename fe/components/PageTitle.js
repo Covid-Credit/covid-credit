@@ -8,7 +8,7 @@ export default function PageTitle(props) {
       fontWeight="700"
       letterSpacing={"-.1rem"}
       lineHeight="1.3"
-      fontSize={{ base: "4xl" }}
+      fontSize={{ base: "3xl", sm: "4xl" }}
       {...props}
     >
       {props.children}
