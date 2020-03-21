@@ -217,7 +217,7 @@ export default function Home() {
                   alignSelf="center"
                   width="100px"
                   my="2"
-                  src="/img/fronted.png"
+                  src="/img/Fronted.png"
                   alt="Fronted"
                 />
               </Link>
