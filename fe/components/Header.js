@@ -40,6 +40,7 @@ const Header = props => {
         <svg
           fill="white"
           width="20px"
+          height="25px"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >

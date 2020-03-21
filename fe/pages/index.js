@@ -53,7 +53,8 @@ export default function Home() {
             alignSelf="center"
             mb="6"
           >
-            This is an <span>early preview</span> to demonstrate effectiveness
+            This is an <span>early preview</span> to demonstrate that this
+            approach can be effective
           </Text>
           <Box textAlign={{ base: "left", sm: "center" }}>
             <Button variantColor="teal" size="lg" onClick={getStarted}>
@@ -183,11 +184,11 @@ export default function Home() {
         bg="teal.500"
         color="white"
       >
-        <Flex align="center" mr="24" mb="5">
+        <Box mr="24" mb="5" width="full">
           <Heading as="h1" size="lg" letterSpacing={"-.1rem"} flexGrow="1">
             Covid Credit
           </Heading>
-        </Flex>
+        </Box>
         <Box
           display="block"
           width={{ base: "full", md: "auto" }}
@@ -196,7 +197,7 @@ export default function Home() {
         >
           <Box>
             <Flex>
-              <Text>
+              <Text mr="10">
                 Covid Credit was designed and created by the UK Fintech
                 Community. With input from:
               </Text>
@@ -252,7 +253,7 @@ export default function Home() {
               >
                 <Image
                   objectFit="cover"
-                  width="100px"
+                  width="160px"
                   my="2"
                   src="/img/CreditKudos.png"
                   alt="11:FS"
