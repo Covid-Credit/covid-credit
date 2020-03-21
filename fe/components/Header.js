@@ -55,7 +55,7 @@ const Header = props => {
         flexGrow={1}
       >
         <MenuItems>About</MenuItems>
-        <MenuItems>Twitter</MenuItems>
+        <MenuItems>I have a report code</MenuItems>
       </Box>
 
       <Box
