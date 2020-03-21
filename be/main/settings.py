@@ -25,6 +25,9 @@ ENVIRONMENT = os.environ.get("ENVIRONMENT", "development")
 local_env_values = dotenv_values()
 
 
+BASE_URL = os.environ.get("BASE_URL", "https://localhost:3000")
+
+
 @functools.lru_cache
 def _load_secret_from_berglas(key: str, default_value: str = None) -> Optional[str]:
     PROJECT_ID = os.environ["PROJECT_ID"]
@@ -72,6 +75,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
