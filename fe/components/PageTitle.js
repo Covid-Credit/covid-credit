@@ -6,8 +6,9 @@ export default function PageTitle(props) {
     <Text
       as="h1"
       fontWeight="700"
+      letterSpacing={"-.1rem"}
       lineHeight="1.3"
-      fontSize={{ base: "2xl" }}
+      fontSize={{ base: "4xl" }}
       {...props}
     >
       {props.children}
