@@ -1,5 +1,6 @@
 import time
 import uuid
+import urllib.parse
 from datetime import timedelta
 from typing import TypedDict
 
@@ -92,6 +93,19 @@ def get_access_token(user: AuthUser) -> str:
         access_token = refresh_access_token(user)
 
     return access_token.access_token
+
+
+def generate_connect_link(access_token):
+    params = {
+        "client_id": settings.CREDIT_KUDOS_CLIENT_ID,
+        "context": "connect",
+        "customer_token": access_token,
+        "redirect_uri": settings.CREDIT_KUDOS_REDIRECT_URI,
+        "tab_journey": False,
+    }
+
+    encoded_params = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
+    return f"https://app.creditkudos.com/#/intro/?{encoded_params}"
 
 
 def refresh_access_token(user: AuthUser) -> CreditKudosProfile:
