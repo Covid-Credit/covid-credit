@@ -47,6 +47,11 @@ def create_pdf(request):
     context = {
         'name': 'Sam Pull',
         'email': 'sam@example.com',
+        'dob': '1970/1/1',
+        'utr': '1234567890',
+        'ni': 'AB123456C',
+        'address': '123 Fake Street, N1 2AB',
+        'loss_of_income': 'partial',
     }
-    pdf = build_pdf(template.render(context))
-    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=True, filename="report.pdf")
+    pdf = build_pdf(template.render(context), builder='xelatexmk')
+    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=False, filename="report.pdf")
