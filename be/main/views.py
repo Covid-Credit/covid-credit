@@ -6,6 +6,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.db import transaction
 from django.http import HttpResponseRedirect, FileResponse
 from django.conf import settings
+from django.template import loader
 
 from integrations.credit_kudos.api import (
     exchange_authorisation_code,
@@ -42,9 +43,26 @@ def complete_credit_kudos(request):
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
 
 def create_pdf(request):
-    min_latex = (r"\documentclass{article}"
-             r"\begin{document}"
-             r"Hello, world!"
-             r"\end{document}")
-    pdf = build_pdf(min_latex)
-    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=True, filename="report.pdf")
+    template = loader.get_template("pdf.tex")
+    context = {
+        'name': 'Sam Pull',
+        'email': 'sam@example.com',
+        'dob': '1970/1/1',
+        'utr': '1234567890',
+        'ni': 'AB123456C',
+        'address': '123 Fake Street, N1 2AB',
+        'loss_of_income': 'partial',
+        'accounts': [{
+            'name': 'Sam Pull Current Account',
+            'number': '12345678',
+            'sort_code': '12-34-56',
+        }],
+        'standard_occupation_code': '6221', # SOC2020 Hairdresser
+
+        'company': {
+            'name': 'Foo Bar Limited',
+            'number': '11112222',
+        },
+    }
+    pdf = build_pdf(template.render(context), builder='xelatexmk')
+    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=False, filename="report.pdf")
