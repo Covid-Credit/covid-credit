@@ -55,17 +55,17 @@ const Header = props => {
         alignItems="center"
         flexGrow={1}
       >
-        <MenuItems>About</MenuItems>
-        <MenuItems>I have a report code</MenuItems>
+        {/* <MenuItems>About</MenuItems>
+        <MenuItems>I have a report code</MenuItems> */}
       </Box>
 
       <Box
         display={{ base: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button bg="transparent" border="1px" onClick={getStarted}>
+        {/* <Button bg="transparent" border="1px" onClick={getStarted}>
           Prove my Income
-        </Button>
+        </Button> */}
       </Box>
     </Flex>
   );
