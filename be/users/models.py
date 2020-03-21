@@ -73,7 +73,9 @@ class AuthUser(AbstractBaseUser, PermissionsMixin):
 
 
 class CreditKudosProfile(models.Model):
-    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name="+")
+    user = models.ForeignKey(
+        AuthUser, on_delete=models.CASCADE, related_name="credit_kudos_profiles"
+    )
 
     access_token = models.TextField()
     token_type = models.TextField()
