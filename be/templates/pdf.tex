@@ -3,6 +3,13 @@
 \usepackage[left=1.5cm,right=1.5cm,bottom=1.5cm,top=1.5cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{sectsty}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+}
 
 \setlength{\parindent}{0cm}
 
@@ -12,7 +19,10 @@
 \begin{document}
 
 \fontfamily{phv}\selectfont
+\allsectionsfont{\fontfamily{phv}\selectfont}
 
+\author{\href{\VAR{link_self}}{\VAR{reference_code}}}
+\date{}
 \maketitle
 
 I, \textbf{\VAR{name}} of \textbf{4 Privet Drive, Surrey, F00 8AR}, do solemnly and sincerely declare that: 
@@ -44,7 +54,21 @@ Declared by \textbf{\VAR{name}} at \textbf{4 Privet Drive, Surrey, F00 8AR} on \
 
 \pagebreak
 
-\section{Evidence}
+\begin{center}
+
+\section*{Evidence}
+
+\begin{tabular}{ |c|c|c| }
+\hline
+\textbf{Date} & \textbf{Description} & \textbf{Amount} \\
+\hline
+\BLOCK{for txn in credit_transactions | sort(attribute="bookedAt", reverse=true)}
+  \VAR{txn.bookedAt | parse_iso8601 | format_date} & \VAR{txn.description} & \textsterling\VAR{txn.amount.value} \\
+  \hline
+\BLOCK{endfor}
+\hline
+\end{tabular}
+\end{center}
 
 
 \end{document}

@@ -1,6 +1,7 @@
 import json
 import base64
 from datetime import datetime
+import dateutil.parser
 import io
 import logging
 import uuid
@@ -22,16 +23,24 @@ from integrations.credit_kudos.api import (
     get_access_token,
     get_inflows_over_time,
     get_latest_report,
+    get_credit_transactions,
 )
 from reports.models import IncomeReport
 
 logger = logging.getLogger(__name__)
 
+def _parse_iso601(value: str) -> datetime:
+    return dateutil.parser.parse(value)
+
+def _format_date(value: datetime) -> str:
+    return value.strftime('%Y-%m-%d')
 
 def _build_pdf(context) -> bytes:
     env = make_env(
       loader=FileSystemLoader(os.path.join(settings.BASE_DIR, 'templates')),
     )
+    env.filters['parse_iso8601'] = _parse_iso601
+    env.filters['format_date'] = _format_date
 
     template = env.get_template("pdf.tex")
     pdf = build_pdf(template.render(context), builder="xelatexmk")
@@ -55,7 +64,10 @@ def create_pdf(request):
       # Report not ready yet.
       return HttpResponse(status=422)
 
+    report_id = report["id"]
+
     income = report["summary"]["income"]["incomeWithBankTransfers"]["predictedMonthlyAmount"]["value"]
+    credit_transactions = get_credit_transactions(income_report, report_id)
 
     context = {
       "logo_path": os.path.join(settings.BASE_DIR, "static/images/creditkudos.png"),
@@ -64,6 +76,9 @@ def create_pdf(request):
       "dob": income_report.date_of_birth,
       "income": income,
       "today": datetime.now().strftime("%d %b %Y"),
+      "credit_transactions": credit_transactions,
+      "reference_code": income_report.reference_code,
+      "link_self": "https://covidcredit.uk/report/{income_report.reference_code}",
     }
     pdf = _build_pdf(context)
     storage_client = storage.Client()
