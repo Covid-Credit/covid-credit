@@ -17,6 +17,8 @@ import {
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+import YouTube from "react-youtube-embed";
+
 import PageTitle from "../components/PageTitle";
 import { postApi } from "../utils";
 
@@ -113,7 +115,6 @@ export default function Home() {
             textAlign={{ base: "left", sm: "center" }}
             onSubmit={handleSubmit}
           >
-
             {state.saved ? (
               <Text
                 color="darkText"
@@ -162,22 +163,13 @@ export default function Home() {
                 <FormErrorMessage>{state.errorMessage}</FormErrorMessage>
               </FormControl>
             )}
-
           </Box>
         </Box>
       </Box>
+      <Box margin="auto" maxWidth="5xl" my="10">
+        <YouTube id="I7F8qC2RVVQ" />
+      </Box>
       <Box>
-        <Text
-          as="h2"
-          textAlign="left"
-          pl="6"
-          fontSize="xl"
-          maxWidth="5xl"
-          margin="auto"
-          mb="6"
-        >
-          How it works
-        </Text>
         <Box
           display="flex"
           flexDirection={{ base: "column", md: "row" }}
