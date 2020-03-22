@@ -60,15 +60,12 @@ def create_pdf(request):
       id=income_report_id,
     )
 
-    report = get_latest_report(income_report)
+    report = get_report(income_report, income_report.credit_kudos_report_id)
     if report["status"] != "complete":
       # Report not ready yet.
       return HttpResponse(status=422)
 
     report_id = report["id"]
-    # Refetch report with summary
-    report = get_report(income_report, report_id)
-
     income = report["summary"]["incomeWithBankTransfers"]["predictedMonthlyAmount"]["value"]
     credit_transactions = get_credit_transactions(income_report, report_id)
 
