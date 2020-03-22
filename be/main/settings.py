@@ -28,7 +28,8 @@ local_env_values = dotenv_values()
 
 BASE_URL = os.environ.get("BASE_URL", "https://localhost:3000")
 
-PROJECT_ID = os.environ["PROJECT_ID"]
+PROJECT_ID = os.environ.get("PROJECT_ID", "covid-dev")
+
 
 @functools.lru_cache
 def _load_secret_from_secret_manager(
@@ -224,7 +225,7 @@ LOGGING = {
 # (socket connect, time to first byte)
 DEFAULT_INTEGRATION_TIMEOUT = (3.5, 20)
 
-GOOGLE_PROJECT_ID = os.environ.get("PROJECT_ID", "fronted-dev")
+GOOGLE_PROJECT_ID = os.environ.get("PROJECT_ID", "covid-dev")
 
 CREDIT_KUDOS_CLIENT_ID = get_secret("CREDIT_KUDOS_CLIENT_ID")
 CREDIT_KUDOS_CLIENT_SECRET = get_secret("CREDIT_KUDOS_CLIENT_SECRET")
