@@ -9,8 +9,9 @@ import {
   Flex,
 } from "@chakra-ui/core";
 import Header from "../components/Header";
+import { postApi, getApi } from "../utils";
 
-export default function BankingDataUsage() {
+export default function BankingDataUsage({ creditKudosLink }) {
   return (
     <>
       <Header />
@@ -127,8 +128,14 @@ export default function BankingDataUsage() {
             </Flex>
           </Flex>
         </Box>
-        <Flex justifyContent="flex-end">
-          <Button variantColor="teal" size="lg" mb={10}>
+        <Flex justifyContent="center">
+          <Button
+            variantColor="teal"
+            size="lg"
+            mb={10}
+            as="a"
+            href={creditKudosLink}
+          >
             Connect using Credit Kudos
           </Button>
         </Flex>
@@ -136,3 +143,13 @@ export default function BankingDataUsage() {
     </>
   );
 }
+
+BankingDataUsage.getInitialProps = async context => {
+  // create report first (if it doesn't exist)
+  await postApi("create-report", {}, context);
+
+  const data = await getApi("report/credit-kudos-link", context);
+  return {
+    creditKudosLink: data.connect_link,
+  };
+};
