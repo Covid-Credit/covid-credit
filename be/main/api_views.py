@@ -23,6 +23,7 @@ class IncomeReportForm(ModelForm):
             "full_name",
             "email",
             "date_of_birth",
+            "industry",
         )
 
 
