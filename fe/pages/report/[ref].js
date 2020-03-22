@@ -15,7 +15,7 @@ import Header from "../../components/Header";
 import { getApi } from "../../utils";
 
 export default function ViewReport({ data, ref }) {
-  const reportLink = `https://storage.cloud.google.com/covid-credit-dev/${data.report_file}`;
+  const reportLink = `https://storage.googleapis.com/covid-credit-dev/${data.report_file}`;
   const { onCopy, hasCopied } = useClipboard(reportLink);
 
   if (!data) {
