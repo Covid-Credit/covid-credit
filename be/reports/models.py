@@ -21,6 +21,9 @@ class IncomeReport(models.Model):
     email = models.TextField(blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
 
+    industry = models.TextField(blank=True)
+
     credit_kudos_report_id = models.CharField(max_length=100, blank=True)
+    file_location = models.TextField(blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

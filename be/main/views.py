@@ -27,6 +27,24 @@ from latex import build_pdf
 
 logger = logging.getLogger(__name__)
 
+def perform_pdf_task(income_report):
+    client = tasks_v2.CloudTasksClient()
+    parent = client.queue_path(settings.PROJECT_ID, "europe-west1", "pdf-queue")
+    task = {
+        "http_request": {
+            "http_method": "POST",
+            "url": settings.BASE_URL + "/_tasks/create-pdf",
+            "oidc_token": {
+                "service_account_email": "123238859534-compute@developer.gserviceaccount.com",
+            },
+            "body": json.dumps({
+                "income_report_id": income_report.id,
+            }).encode(),
+        },
+    }
+    response = client.create_task(parent, task)
+    logger.info("Created task %s", response.name)
+
 
 def complete_credit_kudos(request):
     code = request.GET.get("code", None)
@@ -54,42 +72,8 @@ def complete_credit_kudos(request):
     income_report.credit_kudos_report_id = latest_report["id"]
     income_report.save()
 
+    perform_pdf_task(income_report)
+
     next_path = request.GET.get("next", f"report/{income_report.reference_code}/view")
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
-
-
-def perform_pdf_task(request):
-    client = tasks_v2.CloudTasksClient()
-    parent = client.queue_path(settings.PROJECT_ID, "europe-west1", "pdf-queue")
-    task = {
-        "http_request": {
-            "http_method": "POST",
-            "url": settings.BASE_URL + "/_tasks/create-pdf",
-            "oidc_token": {
-                "service_account_email": "123238859534-compute@developer.gserviceaccount.com",
-            },
-            "body": json.dumps({
-                "name": "Sam Pull",
-                "email": "sam@example.com",
-                "dob": "1970/1/1",
-                "utr": "1234567890",
-                "ni": "AB123456C",
-                "address": "123 Fake Street, N1 2AB",
-                "loss_of_income": "partial",
-                "accounts": [
-                    {
-                        "name": "Sam Pull Current Account",
-                        "number": "12345678",
-                        "sort_code": "12-34-56",
-                    }
-                ],
-                "standard_occupation_code": "6221",  # SOC2020 Hairdresser
-                "company": {"name": "Foo Bar Limited", "number": "11112222",},
-            }).encode(),
-        },
-    }
-    response = client.create_task(parent, task)
-    logger.info("Created task %s", response.name)
-    return HttpResponse("OK")
-
 

@@ -30,42 +30,14 @@
 
         \textbf{Name:} {{ name }} & \textbf{Email:} {{ email }} \\
 
-        \textbf{Address:} {{ address }} & \textbf{Date of Birth:} {{ dob }} \\
+        \textbf{Date of Birth:} {{ dob }} \\
 
-        \textbf{UTR:} {{ utr }} & \textbf{NI:} {{ ni }} \\
         \cmidrule(r){1-1} \cmidrule(r){2-2}
-
-        \textbf{Standard Occupation Code:} {{ standard_occupation_code }}
-
-        {% if company %}
-          \textbf{Company:} {{ company.name }} ({{ company.number }})
-        {% endif %}
-
-        \textbf{Loss of Income:}
-        {% if loss_of_income == 'partial' %}
-          \Square Complete \CheckedBox Partial
-        {% else %}
-          \CheckedBox Complete \Square Partial
-        {% endif %}
     \end{tabularx}
 
     \rule{\textwidth}{3pt}
     \rule{0cm}{1pt}
 
-    \section*{Accounts}
-
-    {% for account in accounts %}
-      \begin{tabularx}{\textwidth} {
-          >{\raggedright\arraybackslash}X
-          >{\raggedright\arraybackslash}X
-          }
-
-      \textbf{Account Name:} {{ account.name }} & \\
-
-      \textbf{Account Number:} {{ account.number }} \textbf{Sort Code:} {{ account.sort_code }} \\
-
-      \end{tabularx}
-    {% endfor %}
 \end{center}
 
 \end{document}
