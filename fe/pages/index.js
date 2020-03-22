@@ -16,6 +16,7 @@ import {
   Image,
 } from "@chakra-ui/core";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 import PageTitle from "../components/PageTitle";
 
@@ -56,7 +57,7 @@ export default function Home() {
         display="flex"
         flexDirection="column"
       >
-        <Box margin="auto" maxWidth="4xl" mx="5" alignSelf="center">
+        <Box margin="auto" maxWidth="4xl" mx="5" py="5" alignSelf="center">
           <PageTitle textAlign={{ base: "left", sm: "center" }} mb="6">
             A proof of concept that helps self-employed workers demonstrate loss
             of income to HMRC from Covid-19.
@@ -74,7 +75,7 @@ export default function Home() {
           </Text>
           <Box
             as="form"
-            maxWidth="xl"
+            maxWidth="lg"
             margin="auto"
             textAlign={{ base: "left", sm: "center" }}
           >
@@ -87,9 +88,9 @@ export default function Home() {
                 pr="2em"
                 borderRadius="lg"
               />
-              <InputRightElement width="7.4em">
+              <InputRightElement width="8.1em">
                 <Button variantColor="teal" size="md" borderRadius="lg">
-                  Join waitlist
+                  I’m Interested
                 </Button>
               </InputRightElement>
             </InputGroup>
@@ -177,93 +178,7 @@ export default function Home() {
           </Text>
         </Box>
       </Box>
-      <Flex
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-        padding="1.5rem"
-        bg="teal.500"
-        color="white"
-      >
-        <Box mr="24" mb="5" width="full">
-          <Heading as="h1" size="lg" letterSpacing={"-.1rem"} flexGrow="1">
-            Covid Credit
-          </Heading>
-        </Box>
-        <Box
-          display="block"
-          width={{ base: "full", md: "auto" }}
-          alignItems="center"
-          flexGrow={1}
-        >
-          <Box>
-            <Flex>
-              <Text mr="10">
-                Covid Credit was designed and created by the UK Fintech
-                Community. With input from:
-              </Text>
-              <Link
-                mr="4"
-                display="inline-block"
-                display="flex"
-                alignItems="center"
-              >
-                <Image
-                  objectFit="cover"
-                  alignSelf="center"
-                  width="100px"
-                  my="2"
-                  src="/img/Fronted.png"
-                  alt="Fronted"
-                />
-              </Link>
-              <Link
-                mr="4"
-                display="inline-block"
-                display="flex"
-                alignItems="center"
-              >
-                <Image
-                  objectFit="cover"
-                  alignSelf="center"
-                  width="100px"
-                  my="2"
-                  src="/img/Coconut.png"
-                  alt="Coconut"
-                />
-              </Link>
-              <Link
-                mr="4"
-                display="inline-block"
-                display="flex"
-                alignItems="center"
-              >
-                <Image
-                  objectFit="cover"
-                  width="60px"
-                  my="2"
-                  src="/img/11FS.png"
-                  alt="11:FS"
-                />
-              </Link>
-              <Link
-                mr="4"
-                display="inline-block"
-                display="flex"
-                alignItems="center"
-              >
-                <Image
-                  objectFit="cover"
-                  width="160px"
-                  my="2"
-                  src="/img/CreditKudos.png"
-                  alt="11:FS"
-                />
-              </Link>
-            </Flex>
-          </Box>
-        </Box>
-      </Flex>
+      <Footer />
     </>
   );
 }
