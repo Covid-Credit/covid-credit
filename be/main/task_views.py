@@ -87,7 +87,7 @@ def create_pdf(request):
     blob = bucket.blob(key)
     blob.upload_from_string(pdf, content_type="application/pdf")
 
-    income_report.file_location = key
+    income_report.file_location = blob.public_url
     income_report.save()
 
     return HttpResponse(blob.self_link)
