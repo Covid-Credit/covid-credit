@@ -12,6 +12,7 @@ flake8-black
 flake8-bugbear
 google-cloud-pubsub
 google-cloud-storage
+google-cloud-secret-manager
 graphene==3.0.dev20190817210753
 gunicorn
 httpx
