@@ -29,7 +29,6 @@ logger = logging.getLogger(__name__)
 def complete_credit_kudos(request):
     code = request.GET.get("code", None)
     state = request.GET.get("state", None)
-    next_path = request.GET.get("next", "connect-bank-account-success")
     error = request.GET.get("error", None)
 
     if not code or not state:
@@ -41,12 +40,15 @@ def complete_credit_kudos(request):
 
     state = json.loads(base64.b64decode(state).decode("utf-8"))
 
-    income_report = IncomeReport.objects.get(id=state["income_report"])
+    income_report = IncomeReport.objects.get(
+        reference_code=state["income_report_reference"]
+    )
     oauth_payload = exchange_authorisation_code(code)
 
     with transaction.atomic():
         save_access_token(income_report, oauth_payload=oauth_payload)
 
+    next_path = request.GET.get("next", f"report/{income_report.reference_code}/view")
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
 
 

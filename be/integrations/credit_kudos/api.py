@@ -1,3 +1,5 @@
+import json
+import base64
 import time
 import uuid
 import urllib.parse
@@ -66,7 +68,7 @@ def save_access_token(
     return access_token
 
 
-def generate_customer_token(email: str, request) -> str:
+def generate_customer_token(email: str) -> str:
     raise_if_disabled()
 
     return jwt.encode(
@@ -80,6 +82,20 @@ def generate_customer_token(email: str, request) -> str:
         getattr(settings, "CREDIT_KUDOS_CLIENT_SECRET", ""),
         algorithm="HS256",
     ).decode("utf-8")
+
+
+def generate_connect_link(access_token, state):
+    params = {
+        "client_id": settings.CREDIT_KUDOS_CLIENT_ID,
+        "context": "connect",
+        "customer_token": access_token,
+        "redirect_uri": settings.CREDIT_KUDOS_REDIRECT_URI,
+        "tab_journey": False,
+        "state": str(base64.b64encode(json.dumps(state).encode("utf-8")), "utf-8"),
+    }
+
+    encoded_params = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
+    return f"https://app.creditkudos.com/#/intro/?{encoded_params}"
 
 
 def get_access_token(income_report: IncomeReport) -> str:
@@ -96,19 +112,6 @@ def get_access_token(income_report: IncomeReport) -> str:
         access_token = refresh_access_token(income_report)
 
     return access_token.access_token
-
-
-def generate_connect_link(access_token):
-    params = {
-        "client_id": settings.CREDIT_KUDOS_CLIENT_ID,
-        "context": "connect",
-        "customer_token": access_token,
-        "redirect_uri": settings.CREDIT_KUDOS_REDIRECT_URI,
-        "tab_journey": False,
-    }
-
-    encoded_params = urllib.parse.urlencode(params, quote_via=urllib.parse.quote)
-    return f"https://app.creditkudos.com/#/intro/?{encoded_params}"
 
 
 def refresh_access_token(income_report: IncomeReport) -> CreditKudosProfile:
