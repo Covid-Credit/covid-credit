@@ -38,7 +38,10 @@ export default function ViewReport({ data, ref }) {
         </Text>
         {data.status === "pending" ? (
           <Stack spacing={10}>
-            <Text>Generating your report. Come back in a minute to see it</Text>
+            <Text>
+              Generating your report. This page will update as soon as it's
+              ready
+            </Text>
             <Spinner size="xl" />
           </Stack>
         ) : (
@@ -52,7 +55,13 @@ export default function ViewReport({ data, ref }) {
               >
                 View your income report & declaration
               </Text>
-              <Button variantColor="teal" variant="link" size="md" as="a" href={reportLink}>
+              <Button
+                variantColor="teal"
+                variant="link"
+                size="md"
+                as="a"
+                href={reportLink}
+              >
                 View your report
               </Button>
             </Box>

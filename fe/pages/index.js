@@ -176,7 +176,7 @@ export default function Home() {
         </Box>
       </Box>
       <Box margin="auto" maxWidth="5xl" my="10">
-        <YouTube id="8NfJg0vu-ug" />
+        <YouTube id="i0OG6h-fEAE" />
       </Box>
       <Box>
         <Box
@@ -213,13 +213,6 @@ export default function Home() {
             id="why"
           >
             Why are we doing this?
-          </Text>
-          <Text fontSize="lg" mb="5">
-            In 48 hours a team from the fintech community assembled and built a
-            working proof of concept. Covid Credit allows a sole trader in the
-            UK to generate a self-certification of income loss to send to HMRC
-            by connecting to their bank account and proving their previous 12
-            months of income.
           </Text>
           <Text fontSize="lg" mb="5">
             In 48 hours a team from the Fintech community got together and built
