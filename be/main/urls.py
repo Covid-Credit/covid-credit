@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
+from . import api_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("complete/credit-kudos", views.complete_credit_kudos),
     path("build_pdf", views.create_pdf),
+    path("api/create-report", api_views.create_report),
 ]

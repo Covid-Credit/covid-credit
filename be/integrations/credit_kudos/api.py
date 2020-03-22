@@ -10,7 +10,8 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 from main.utils import tz_now
-from users.models import AuthUser, CreditKudosProfile
+from reports.models import IncomeReport
+from users.models import CreditKudosProfile
 
 from ..utils import BearerAuth
 
@@ -52,10 +53,10 @@ def exchange_authorisation_code(authorisation_code: str) -> OauthTokenResponse:
 
 
 def save_access_token(
-    user: AuthUser, oauth_payload: OauthTokenResponse
+    income_report: IncomeReport, oauth_payload: OauthTokenResponse
 ) -> CreditKudosProfile:
     access_token = CreditKudosProfile.objects.create(
-        user=user,
+        income_report=income_report,
         access_token=oauth_payload["access_token"],
         token_type=oauth_payload["token_type"],
         expires_at=tz_now() + timedelta(seconds=oauth_payload["expires_in"]),
@@ -81,16 +82,18 @@ def generate_customer_token(email: str, request) -> str:
     ).decode("utf-8")
 
 
-def get_access_token(user: AuthUser) -> str:
+def get_access_token(income_report: IncomeReport) -> str:
     access_token = (
-        CreditKudosProfile.objects.filter(user=user, expires_at__gte=tz_now(),)
+        CreditKudosProfile.objects.filter(
+            income_report=income_report, expires_at__gte=tz_now(),
+        )
         .order_by("-created_at")
         .first()
     )
 
     if not access_token:
         # Refresh access token
-        access_token = refresh_access_token(user)
+        access_token = refresh_access_token(income_report)
 
     return access_token.access_token
 
@@ -108,11 +111,13 @@ def generate_connect_link(access_token):
     return f"https://app.creditkudos.com/#/intro/?{encoded_params}"
 
 
-def refresh_access_token(user: AuthUser) -> CreditKudosProfile:
+def refresh_access_token(income_report: IncomeReport) -> CreditKudosProfile:
     raise_if_disabled()
 
     oldest_token = (
-        CreditKudosProfile.objects.filter(user=user).order_by("-created_at").first()
+        CreditKudosProfile.objects.filter(income_report=income_report)
+        .order_by("-created_at")
+        .first()
     )
     if not oldest_token:
         raise CreditKudosNoToken("User doesn't have a Credit Kudos access token")
@@ -128,13 +133,13 @@ def refresh_access_token(user: AuthUser) -> CreditKudosProfile:
 
     data = response.json()
 
-    return save_access_token(user=user, oauth_payload=data)
+    return save_access_token(income_report=income_report, oauth_payload=data)
 
 
-def get_reports(user: AuthUser):
+def get_reports(income_report: IncomeReport):
     raise_if_disabled()
 
-    access_token = get_access_token(user)
+    access_token = get_access_token(income_report)
 
     response = requests.get(
         "https://api.creditkudos.com/v3/reports", auth=BearerAuth(access_token),
@@ -147,8 +152,8 @@ def get_reports(user: AuthUser):
     return reports
 
 
-def get_latest_report(user: AuthUser):
-    reports = get_reports(user)
+def get_latest_report(income_report: IncomeReport):
+    reports = get_reports(income_report)
 
     if len(reports) == 0:
         raise Exception("No reports found")
@@ -160,8 +165,8 @@ def get_latest_report(user: AuthUser):
     return latest_report
 
 
-def get_connected_accounts(user: AuthUser, report_id: int):
-    access_token = get_access_token(user)
+def get_connected_accounts(income_report: IncomeReport, report_id: int):
+    access_token = get_access_token(income_report)
 
     response = requests.get(
         f"https://api.creditkudos.com/v3/reports/{report_id}/accounts",
