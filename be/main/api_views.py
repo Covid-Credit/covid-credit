@@ -1,10 +1,19 @@
 import json
+from copy import copy
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from django.forms import ModelForm
 
 from integrations.credit_kudos.api import generate_connect_link, generate_customer_token
 from reports.models import IncomeReport
+
+
+def populate_full_data(data, IncomeReportForm, instance):
+    populated_full_data = copy(data)
+    for field in IncomeReportForm.Meta.fields:
+        if field not in populated_full_data:
+            populated_full_data[field] = getattr(instance, field)
+    return populated_full_data
 
 
 class IncomeReportForm(ModelForm):
@@ -47,7 +56,8 @@ def update_report(request):
     report = get_or_create_report(request)
 
     data = json.loads(request.body)
-    form = IncomeReportForm(data, instance=report)
+    populated_data = populate_full_data(data, IncomeReportForm, report)
+    form = IncomeReportForm(populated_data, instance=report)
     if not form.is_valid():
         return JsonResponse({"errors": form.errors,}, status=400)
 
