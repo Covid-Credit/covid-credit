@@ -8,7 +8,9 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/core";
-import Header from "../components/Header";
+
+import HeaderProgress from "../components/HeaderProgress";
+
 import { postApi, getApi } from "../utils";
 
 async function getCreditKudosLink() {
@@ -37,7 +39,7 @@ export default function BankingDataUsage() {
 
   return (
     <>
-      <Header />
+      <HeaderProgress progress={60} />
       <Box maxWidth="2xl" margin="auto" mt={{ base: "10", sm: "16" }} px="5">
         <Text
           mb="5"
