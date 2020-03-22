@@ -165,6 +165,20 @@ def get_latest_report(income_report: IncomeReport):
     return latest_report
 
 
+def get_report(income_report: IncomeReport, report_id: int):
+    access_token = get_access_token(income_report)
+
+    response = requests.get(
+        "https://api.creditkudos.com/v3/reports/{report_id}", auth=BearerAuth(access_token),
+    )
+    response.raise_for_status()
+
+    data = response.json()["data"]
+
+    report = data["report"]
+    return report
+
+
 def get_connected_accounts(income_report: IncomeReport, report_id: int):
     access_token = get_access_token(income_report)
 
