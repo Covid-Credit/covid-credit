@@ -20,6 +20,7 @@ from integrations.credit_kudos.api import (
     get_inflows_over_time,
     get_latest_report,
 )
+from reports.models import IncomeReport
 
 logger = logging.getLogger(__name__)
 
