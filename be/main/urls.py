@@ -18,6 +18,7 @@ from django.urls import path
 
 from . import views
 from . import api_views
+from . import task_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path("build_pdf", views.create_pdf),
     path("api/create-report", api_views.create_report),
     path("api/report/credit-kudos-link", api_views.generate_credit_kudos_link,),
+    path("_tasks/create-pdf", task_views.create_pdf),
 ]
