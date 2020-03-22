@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -11,7 +11,30 @@ import {
 import Header from "../components/Header";
 import { postApi, getApi } from "../utils";
 
-export default function BankingDataUsage({ creditKudosLink }) {
+async function getCreditKudosLink() {
+  // create report first (if it doesn't exist)
+  await postApi("create-report", {});
+
+  const data = await getApi("report/credit-kudos-link");
+  return data.connect_link;
+}
+
+export default function BankingDataUsage() {
+  const [state, setState] = useState({
+    loading: true,
+    creditKudosLink: null,
+  });
+
+  useEffect(() => {
+    getCreditKudosLink().then(link => {
+      setState(state => ({
+        ...state,
+        loading: false,
+        creditKudosLink: link,
+      }));
+    });
+  }, []);
+
   return (
     <>
       <Header />
@@ -134,7 +157,8 @@ export default function BankingDataUsage({ creditKudosLink }) {
             size="lg"
             mb={10}
             as="a"
-            href={creditKudosLink}
+            isLoading={state.loading}
+            href={state.creditKudosLink}
           >
             Connect using Credit Kudos
           </Button>
@@ -143,13 +167,3 @@ export default function BankingDataUsage({ creditKudosLink }) {
     </>
   );
 }
-
-BankingDataUsage.getInitialProps = async context => {
-  // create report first (if it doesn't exist)
-  await postApi("create-report", {}, context);
-
-  const data = await getApi("report/credit-kudos-link", context);
-  return {
-    creditKudosLink: data.connect_link,
-  };
-};
