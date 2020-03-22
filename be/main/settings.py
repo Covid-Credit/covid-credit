@@ -13,9 +13,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import functools
 import os
 import dj_database_url
-import berglas_python as berglas
 from dotenv import dotenv_values
 from typing import Optional
+from google.cloud import secretmanager
+import google
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,19 +30,28 @@ BASE_URL = os.environ.get("BASE_URL", "https://localhost:3000")
 
 
 @functools.lru_cache
-def _load_secret_from_berglas(key: str, default_value: str = None) -> Optional[str]:
+def _load_secret_from_secret_manager(
+    key: str, default_value: str = None
+) -> Optional[str]:
     PROJECT_ID = os.environ["PROJECT_ID"]
-    BUCKET_ID = os.environ["BERGLAS_BUCKET_ID"]
+
+    client = secretmanager.SecretManagerServiceClient()
+    name = client.secret_version_path(PROJECT_ID, key, "latest")
 
     try:
-        return berglas.Resolve(PROJECT_ID, f"berglas://{BUCKET_ID}/{key}")
-    except Exception:
+        response = client.access_secret_version(name)
+    except google.api_core.exceptions.NotFound:
         return default_value
+    except ValueError:
+        return default_value
+
+    payload = response.payload.data.decode("UTF-8")
+    return payload
 
 
 def get_secret(key: str, default_value: str = None) -> Optional[str]:
     if ENVIRONMENT == "production":
-        return _load_secret_from_berglas(key, default_value)
+        return _load_secret_from_secret_manager(key, default_value)
 
     return local_env_values.get(key, os.environ.get(key, default_value))
 
