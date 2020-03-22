@@ -63,7 +63,7 @@ def get_secret(key: str, default_value: str = None) -> Optional[str]:
 SECRET_KEY = get_secret("SECRET_KEY", "DEFAULT_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(ENVIRONMENT != "production")
 
 if DEBUG:
     ALLOWED_HOSTS = ["127.0.0.1", "localhost", "host.docker.internal"]
