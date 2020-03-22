@@ -1,6 +1,7 @@
 import json
 import base64
 from datetime import datetime
+import dateutil.parser
 import io
 import logging
 import uuid
@@ -28,11 +29,18 @@ from reports.models import IncomeReport
 
 logger = logging.getLogger(__name__)
 
+def _parse_iso601(value: str) -> datetime:
+    return dateutil.parser.parse(value)
+
+def _format_date(value: datetime) -> str:
+    return value.strftime('%Y-%m-%d')
 
 def _build_pdf(context) -> bytes:
     env = make_env(
       loader=FileSystemLoader(os.path.join(settings.BASE_DIR, 'templates')),
     )
+    env.filters['parse_iso8601'] = _parse_iso601
+    env.filters['format_date'] = _format_date
 
     template = env.get_template("pdf.tex")
     pdf = build_pdf(template.render(context), builder="xelatexmk")
