@@ -110,7 +110,7 @@ export default function Home() {
             with self-employed income.
           </Text>
           <Text>
-            Individuals that are self-employed can use covid.credit to generate
+            Individuals that are self-employed can use Covid Credit to generate
             a self-certification of income loss to send to HMRC
           </Text>
         </Box>
@@ -125,7 +125,7 @@ export default function Home() {
           </Text>
           <Box mb="8">
             <Text fontWeight="bold" mb="2">
-              What is Covid.credit?
+              What is Covid Credit?
             </Text>
             <Text>
               This is a proof of concept to demonstrate how open banking data
