@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Router } from "next/router";
+import Router from "next/router";
 import {
   Box,
   RadioButtonGroup,
@@ -23,7 +23,7 @@ export default function PreQuestions() {
 
   const [formData, setFormData] = useState({
     self_employed: null,
-    limited_company: null,
+    ltd_company: null,
     employed_since: "2019-01-01",
   });
 
@@ -33,15 +33,15 @@ export default function PreQuestions() {
     const errors = {};
 
     if (!formData.self_employed) {
-      errors["selfEmployed"] = "Required field";
+      errors["self_employed"] = "Required field";
     }
 
-    if (!formData.limited_company) {
-      errors["limitedCompany"] = "Required field";
+    if (!formData.ltd_company) {
+      errors["ltd_company"] = "Required field";
     }
 
     if (!formData.employed_since) {
-      errors["employedSince"] = "Required field";
+      errors["employed_since"] = "Required field";
     }
 
     if (Object.keys(errors).length > 0) {
@@ -54,7 +54,7 @@ export default function PreQuestions() {
 
     const payload = {
       self_employed: formData.self_employed === "no" ? false : true,
-      limited_company: formData.limited_company === "no" ? false : true,
+      ltd_company: formData.ltd_company === "no" ? false : true,
       employed_since: formData.employed_since,
     };
 
@@ -74,7 +74,7 @@ export default function PreQuestions() {
       }));
       return;
     }
-    Router.push("/about-you");
+    Router.push("/industry");
   };
 
   return (
@@ -85,10 +85,9 @@ export default function PreQuestions() {
         </Heading>
 
         <Box display="flex" justifyContent="space-between" mb="10">
-          <FormControl isRequired>
+          <FormControl isRequired isInvalid={!!state.errors["self_employed"]}>
             <FormLabel htmlFor="email">Are you self-employed?</FormLabel>
             <RadioButtonGroup
-              defaultValue="yes"
               isInline
               flexShrink="0"
               flexWrap="nowrap"
@@ -104,22 +103,21 @@ export default function PreQuestions() {
               <CustomRadio value="no">No</CustomRadio>
               <CustomRadio value="yes">Yes</CustomRadio>
             </RadioButtonGroup>
-            <FormErrorMessage>{state.errors["cancelledWork"]}</FormErrorMessage>
+            <FormErrorMessage>{state.errors["self_employed"]}</FormErrorMessage>
           </FormControl>
         </Box>
 
         <Box display="flex" justifyContent="space-between" mb="10">
-          <FormControl isRequired >
+          <FormControl isRequired isInvalid={!!state.errors["ltd_company"]}>
             <FormLabel htmlFor="email">
               Do you trade under your own LTD company?
             </FormLabel>
             <RadioButtonGroup
-              defaultValue="yes"
-              value={formData.limited_company}
+              value={formData.ltd_company}
               onChange={val => {
                 setFormData(data => ({
                   ...data,
-                  limited_company: val,
+                  ltd_company: val,
                 }));
               }}
               isInline
@@ -130,9 +128,7 @@ export default function PreQuestions() {
               <CustomRadio value="no">No</CustomRadio>
               <CustomRadio value="yes">Yes</CustomRadio>
             </RadioButtonGroup>
-            <FormErrorMessage>
-              {state.errors["limited_company"]}
-            </FormErrorMessage>
+            <FormErrorMessage>{state.errors["ltd_company"]}</FormErrorMessage>
           </FormControl>
         </Box>
 
@@ -160,7 +156,9 @@ export default function PreQuestions() {
                 }));
               }}
             />
-            <FormErrorMessage>{state.errors["employed_since"]}</FormErrorMessage>
+            <FormErrorMessage>
+              {state.errors["employed_since"]}
+            </FormErrorMessage>
           </FormControl>
         </Box>
         <Button variantColor="teal" type="submit" isLoading={state.loading}>

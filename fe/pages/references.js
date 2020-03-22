@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Router from "next/router";
 import {
   Box,
+  Button,
   Heading,
   Input,
   FormControl,
   FormLabel,
   FormErrorMessage,
 } from "@chakra-ui/core";
-import FormControls from "../components/form/Controls";
 import { Wrapper } from "../components/Wrapper";
 import { postApi } from "../utils";
 
@@ -70,7 +70,7 @@ export const References = props => {
   };
 
   return (
-    <Wrapper onSumbit={handleSubmit}>
+    <Wrapper onSubmit={handleSubmit}>
       <Box>
         <Heading as="h2" fontSize="4xl" margin="30px 0 40px">
           Your References
@@ -83,7 +83,6 @@ export const References = props => {
           >
             <FormLabel htmlFor="email">National Insurance Number</FormLabel>
             <Input
-              type="number"
               placeholder="e.g. QQ123456C..."
               value={formData.national_insurance_number}
               onChange={event => {
@@ -108,7 +107,6 @@ export const References = props => {
               Your Unique Tax Reference Number
             </FormLabel>
             <Input
-              type="number"
               placeholder="e.g. 1234567890..."
               value={formData.unique_tax_reference}
               onChange={event => {
@@ -124,7 +122,9 @@ export const References = props => {
             </FormErrorMessage>
           </FormControl>
         </Box>
-        <FormControls />
+        <Button variantColor="teal" type="submit" isLoading={state.loading}>
+          Next
+        </Button>
       </Box>
     </Wrapper>
   );
