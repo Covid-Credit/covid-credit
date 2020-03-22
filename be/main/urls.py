@@ -24,8 +24,5 @@ urlpatterns = [
     path("complete/credit-kudos", views.complete_credit_kudos),
     path("build_pdf", views.create_pdf),
     path("api/create-report", api_views.create_report),
-    path(
-        "api/report/<str:income_report_reference>/credit-kudos-link",
-        api_views.generate_credit_kudos_link,
-    ),
+    path("api/report/credit-kudos-link", api_views.generate_credit_kudos_link,),
 ]
