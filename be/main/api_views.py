@@ -3,6 +3,7 @@ from copy import copy
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from django.forms import ModelForm
+from django.shortcuts import get_object_or_404
 
 from integrations.credit_kudos.api import generate_connect_link, generate_customer_token
 from users.models import Waitlist
@@ -24,11 +25,17 @@ class IncomeReportForm(ModelForm):
             "full_name",
             "email",
             "date_of_birth",
+            "address",
+            "self_employed",
+            "ltd_company",
+            "employed_since",
             "industry",
             "cancelled_work",
             "future_work_cancelled",
             "monthly_earnings",
             "future_earnings",
+            "national_insurance_number",
+            "unique_tax_reference",
         )
 
 
@@ -70,6 +77,15 @@ def update_report(request):
     form.save()
 
     return JsonResponse({"income_report_reference": report.reference_code,})
+
+
+def get_report(request, report_reference_code):
+    report = get_object_or_404(IncomeReport, reference_code=report_reference_code)
+
+    if report.file_location:
+        return JsonResponse({"status": "ready", "report_file": report.file_location,})
+
+    return JsonResponse({"status": "pending",})
 
 
 def generate_credit_kudos_link(request):

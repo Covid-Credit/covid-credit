@@ -58,9 +58,10 @@ hstspreload==2020.3.17    # via httpx
 httpx==0.12.1             # via -r requirements.in
 hyperframe==5.2.0         # via h2
 idna==2.9                 # via httpx, requests
-importlib-metadata==1.5.0  # via pluggy, pytest
+jinja2==2.11.1            # via -r requirements.in
 latex==0.7.0              # via -r requirements.in
 markdown==3.2.1           # via django-markdownify
+markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8
 more-itertools==8.2.0     # via pytest
 oauthlib==3.1.0           # via requests-oauthlib, social-auth-core
@@ -113,7 +114,6 @@ wcwidth==0.1.8            # via pytest
 webencodings==0.5.1       # via bleach
 whitenoise==5.0.1         # via -r requirements.in
 wmctrl==0.3               # via pdbpp
-zipp==3.1.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

@@ -165,6 +165,20 @@ def get_latest_report(income_report: IncomeReport):
     return latest_report
 
 
+def get_report(income_report: IncomeReport, report_id: int):
+    access_token = get_access_token(income_report)
+
+    response = requests.get(
+        f"https://api.creditkudos.com/v3/reports/{report_id}", auth=BearerAuth(access_token),
+    )
+    response.raise_for_status()
+
+    data = response.json()["data"]
+
+    report = data["report"]
+    return report
+
+
 def get_connected_accounts(income_report: IncomeReport, report_id: int):
     access_token = get_access_token(income_report)
 
@@ -196,6 +210,26 @@ def get_inflows_over_time(income_report: IncomeReport, report_id: int):
 
     data = response.json()["data"]
     return data["inflowsOverTime"]
+
+
+def get_credit_transactions(income_report: IncomeReport, report_id: int):
+    accounts = get_connected_accounts(income_report, report_id)
+    access_token = get_access_token(income_report)
+
+    credit_transactions = []
+    for account in accounts:
+        account_id = account["id"]
+        response = requests.get(
+            f"https://api.creditkudos.com/v3/reports/{report_id}/accounts/{account_id}/transactions",
+            params={
+                "inflow_outflow_indicator": "inflow",
+            },
+            auth=BearerAuth(access_token),
+        )
+        response.raise_for_status()
+        credit_transactions += response.json()["data"]["transactions"]
+
+    return credit_transactions
 
 
 class UserInfoPayload(TypedDict):
