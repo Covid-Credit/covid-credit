@@ -47,6 +47,18 @@ def _build_pdf(context) -> bytes:
     pdf = build_pdf(template.render(context), builder="xelatexmk")
     return bytes(pdf)
 
+def _get_employment_type(income_report: IncomeReport) -> str:
+    if income_report.self_employed:
+        return 'self-employed person'
+    else:
+        return 'sole trader'
+
+def _get_loss_type(income_report: IncomeReport) -> str:
+    if income_report.cancelled_work:
+        return 'has lost'
+    elif income_report.future_work_cancelled:
+        return 'will lose'
+
 def test_pdf(request):
     params = json.loads(request.body)
     params["logo_path"] = os.path.join(settings.BASE_DIR, "static/images/creditkudos.png")
@@ -73,12 +85,20 @@ def create_pdf(request):
       "logo_path": os.path.join(settings.BASE_DIR, "static/images/creditkudos.png"),
       "name": income_report.full_name,
       "email": income_report.email,
+      "address": income_report.address,
       "dob": income_report.date_of_birth,
       "income": income,
       "today": datetime.now().strftime("%d %b %Y"),
       "credit_transactions": credit_transactions,
       "reference_code": income_report.reference_code,
       "link_self": "https://covidcredit.uk/report/{income_report.reference_code}",
+
+      "national_insurance": income_report.national_insurance,
+      "unique_tax_reference": income_report.unique_tax_reference,
+      "employment_type": _get_employment_type(income_report),
+      "industry": income_report.industry,
+      "loss_type": _get_loss_type(income_report),
+      "future_earnings": income_report.future_earnings,
     }
     pdf = _build_pdf(context)
     storage_client = storage.Client()
