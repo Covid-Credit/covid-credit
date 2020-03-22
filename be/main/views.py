@@ -46,7 +46,17 @@ def complete_credit_kudos(request):
 
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
 
-def create_pdf(request):
+
+def check_report_status(request):
+    # retrieve Report ID from request
+    # call CK API to check status of Report
+    # if status = complete, then create PDF
+    # else return "not ready"
+    pdf = create_pdf()
+
+    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=False, filename="report.pdf")
+
+def create_pdf():
     template = loader.get_template("pdf.tex")
     context = {
         'name': 'Sam Pull',
@@ -76,4 +86,4 @@ def create_pdf(request):
     blob = bucket.blob("reports/%s.pdf" % uuid.uuid4())
     blob.upload_from_string(bytes(pdf), content_type="application/pdf")
 
-    return FileResponse(io.BytesIO(bytes(pdf)), as_attachment=False, filename="report.pdf")
+    return pdf
