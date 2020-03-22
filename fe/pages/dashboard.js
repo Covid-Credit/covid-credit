@@ -39,7 +39,7 @@ export default function BankingDataUsage() {
         </Text>
         <Text mb={5}>
           Here you can manage your generated report. Bookmark this page to come
-          back here
+          back here.
         </Text>
         <Stack spacing={10}>
           <Box borderTop="1px solid #EEE" pt={5}>
@@ -49,10 +49,10 @@ export default function BankingDataUsage() {
               fontWeight="bold"
               fontSize="xs"
             >
-              View your income report
+              View your income report & declaration
             </Text>
             <Button variantColor="teal" variant="link" size="md">
-              View income report
+              View your report
             </Button>
           </Box>
           <Box>
@@ -62,7 +62,7 @@ export default function BankingDataUsage() {
               fontWeight="bold"
               fontSize="xs"
             >
-              Share your income report code
+              Share the above report
             </Text>
             <InputGroup size="md">
               <Input variant="filled" value={state.shareCode} pr="2em" />
@@ -83,7 +83,7 @@ export default function BankingDataUsage() {
               Manage your data
             </Text>
             <Button variantColor="red" size="md" variant="link">
-              Permanently delete my income report
+              Permanently delete all of my data
             </Button>
           </Box>
         </Stack>
