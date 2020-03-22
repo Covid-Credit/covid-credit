@@ -8,11 +8,12 @@ from urllib.parse import urlencode
 
 from django.core.exceptions import SuspiciousOperation
 from django.db import transaction
-from django.http import HttpResponseRedirect, FileResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.template import loader
 
 from google.cloud import storage
+from google.cloud import tasks_v2
 
 from reports.models import IncomeReport
 from integrations.credit_kudos.api import (
@@ -55,4 +56,40 @@ def complete_credit_kudos(request):
 
     next_path = request.GET.get("next", f"report/{income_report.reference_code}/view")
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
+
+
+def perform_pdf_task(request):
+    client = tasks_v2.CloudTasksClient()
+    parent = client.queue_path(settings.PROJECT_ID, "europe-west1", "pdf-queue")
+    task = {
+        "http_request": {
+            "http_method": "POST",
+            "url": settings.BASE_URL + "/_tasks/create-pdf",
+            "oidc_token": {
+                "service_account_email": "123238859534-compute@developer.gserviceaccount.com",
+            },
+            "body": json.dumps({
+                "name": "Sam Pull",
+                "email": "sam@example.com",
+                "dob": "1970/1/1",
+                "utr": "1234567890",
+                "ni": "AB123456C",
+                "address": "123 Fake Street, N1 2AB",
+                "loss_of_income": "partial",
+                "accounts": [
+                    {
+                        "name": "Sam Pull Current Account",
+                        "number": "12345678",
+                        "sort_code": "12-34-56",
+                    }
+                ],
+                "standard_occupation_code": "6221",  # SOC2020 Hairdresser
+                "company": {"name": "Foo Bar Limited", "number": "11112222",},
+            }).encode(),
+        },
+    }
+    response = client.create_task(parent, task)
+    logger.info("Created task %s", response.name)
+    return HttpResponse("OK")
+
 
