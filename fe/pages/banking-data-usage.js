@@ -26,8 +26,8 @@ export default function BankingDataUsage() {
           Connect your primary bank account
         </Text>
         <Text mb="5">
-          We use open banking data through Credit Kudos to prove your income,
-          here's what we'll do with that data
+          We use open banking data via Credit Kudos to prove your income, This
+          is how Covid Credit will use your data:
         </Text>
         <List spacing={6} mb={5}>
           <ListItem display="flex">
@@ -41,7 +41,7 @@ export default function BankingDataUsage() {
             <Box>
               <Text fontWeight="semibold">We’ll validate that it’s you</Text>
               <Text fontSize="sm">
-                We’ll check the details on your accounts
+                This requires access to your account details.
               </Text>
             </Box>
           </ListItem>
@@ -55,9 +55,11 @@ export default function BankingDataUsage() {
             />
             <Box>
               <Text fontWeight="semibold">
-                We'll analyse your accounts to generate a report
+                We'll generate an income report from your transactions
               </Text>
-              <Text fontSize="sm">We’ll look at the transaction data</Text>
+              <Text fontSize="sm">
+                This requires access to your transactions.
+              </Text>
             </Box>
           </ListItem>
           <ListItem display="flex">
@@ -70,7 +72,9 @@ export default function BankingDataUsage() {
             />
             <Box>
               <Text fontWeight="semibold">We’ll keep your data private</Text>
-              <Text fontSize="sm">You control who to share your data with</Text>
+              <Text fontSize="sm">
+                You control when and who to send the report to.
+              </Text>
             </Box>
           </ListItem>
           <ListItem display="flex">
@@ -86,7 +90,7 @@ export default function BankingDataUsage() {
                 You can delete the data at any time
               </Text>
               <Text fontSize="sm">
-                You'll get a link at the end to manage your data
+                You'll get a link at the end to manage your report.
               </Text>
             </Box>
           </ListItem>
