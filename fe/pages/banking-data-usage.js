@@ -87,7 +87,7 @@ export default function BankingDataUsage() {
             />
             <Box>
               <Text fontWeight="semibold">
-                You can delete the data at any time
+                You can delete your data at any time
               </Text>
               <Text fontSize="sm">
                 You'll get a link at the end to manage your report.
