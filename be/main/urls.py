@@ -29,4 +29,5 @@ urlpatterns = [
     path("api/report/<str:report_reference_code>", api_views.get_report),
     path("api/report/credit-kudos-link", api_views.generate_credit_kudos_link,),
     path("_tasks/create-pdf", task_views.create_pdf),
+    path("_tasks/test-pdf", task_views.test_pdf),
 ]

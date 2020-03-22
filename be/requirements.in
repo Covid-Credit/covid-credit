@@ -17,6 +17,7 @@ google-cloud-tasks
 graphene==3.0.dev20190817210753
 gunicorn
 httpx
+jinja2
 latex
 phonenumbers
 pip-tools

@@ -1,43 +1,50 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
-\usepackage[utf8]{inputenc}
-\usepackage{tabularx}
-\usepackage{multirow}
-\usepackage{wasysym}
-\usepackage[left=0.8cm,right=0.8cm,bottom=0.4cm,top=0.4cm]{geometry}
-\usepackage{fontspec}
-\usepackage{booktabs}
-\usepackage{colortbl}
-\usepackage{graphicx}
-\usepackage[export]{adjustbox}
-\usepackage{makecell}
-\usepackage{tikz}
-\usetikzlibrary{calc}
+\usepackage[left=1.5cm,right=1.5cm,bottom=1.5cm,top=1.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+
+\setlength{\parindent}{0cm}
 
 \pagenumbering{gobble}
+\title{Self-employed Person's Statement of Lost Income to Claim Government Relief Payments}
 
 \begin{document}
 
-\includegraphics[scale=0.18, right]{\string {{ logo_path }}}
+\fontfamily{phv}\selectfont
 
-\begin{center}
-    \renewcommand{\arraystretch}{0.85}
+\maketitle
 
-    \begin{tabularx}{\textwidth} {
-        >{\raggedright\arraybackslash}X
-        >{\raggedright\arraybackslash}X
-        }
+I, \textbf{\VAR{name}} of \textbf{4 Privet Drive, Surrey, F00 8AR}, do solemnly and sincerely declare that: 
 
-        \textbf{Name:} {{ name }} & \textbf{Email:} {{ email }} \\
+\vspace{12pt}
 
-        \textbf{Date of Birth:} {{ dob }} \\
+\begin{enumerate}
+  \item I am a \textbf{self-employed person / sole trader} who \textbf{has lost / will lose} \textbf{all / part} of my income due to restrictions introduced by the Government to combat COVID-19
+  \item My National Insurance Number is \textbf{MS 11 22 33 AB}
+  \item My Unique Tax Payer Reference is \textbf{UTR-000123456789}
+  \item My usual occupation (SIC Code) is \textbf{Other retail sale of food in specialised stores (47290)}
+  \item My estimated earnings per month would have been \textbf{\textsterling \VAR{income}}
+  \item I estimate my earnings for the foreseeable future to be \textbf{\textsterling 150}
+  \item I have attached below evidence of my previous income for the 12 months preceding March 1st 2020, securely retrieved by the website covidcredit.uk on \textbf{\VAR{today}}
+  \item I wish to claim income support of 80\% of my expected lost earnings, up to \textbf{\textsterling 2,500/month} until I am able to return to work.
+\end{enumerate}
 
-        \cmidrule(r){1-1} \cmidrule(r){2-2}
-    \end{tabularx}
+\vspace{12pt}
 
-    \rule{\textwidth}{3pt}
-    \rule{0cm}{1pt}
+And I make this solemn declaration conscientiously believing the same to be true and by personal declaration.
 
-\end{center}
+\vspace{36pt}
+
+Declared by \textbf{\VAR{name}} at \textbf{4 Privet Drive, Surrey, F00 8AR} on \textbf{\VAR{today}}
+
+\vspace{18pt}
+
+\rule{\textwidth}{0.4pt}
+
+\pagebreak
+
+\section{Evidence}
+
 
 \end{document}
