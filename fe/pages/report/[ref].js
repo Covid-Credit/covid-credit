@@ -15,13 +15,12 @@ import Header from "../../components/Header";
 import { getApi } from "../../utils";
 
 export default function ViewReport({ data, ref }) {
-  const { onCopy, hasCopied } = useClipboard(data.report_file);
+  const reportLink = `https://storage.cloud.google.com/covid-credit-dev/${data.report_file}`;
+  const { onCopy, hasCopied } = useClipboard(reportLink);
 
   if (!data) {
     return <Error statusCode={404} />;
   }
-
-  console.log(data);
 
   return (
     <>
@@ -53,7 +52,7 @@ export default function ViewReport({ data, ref }) {
               >
                 View your income report & declaration
               </Text>
-              <Button variantColor="teal" variant="link" size="md" as="a" href={data.report_file}>
+              <Button variantColor="teal" variant="link" size="md" as="a" href={reportLink}>
                 View your report
               </Button>
             </Box>
