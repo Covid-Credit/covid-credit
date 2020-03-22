@@ -185,6 +185,19 @@ def get_connected_accounts(income_report: IncomeReport, report_id: int):
     return accounts
 
 
+def get_inflows_over_time(income_report: IncomeReport, report_id: int):
+    access_token = get_access_token(income_report)
+
+    response = requests.get(
+        f"https://api.creditkudos.com/v3/reports/{report_id}/inflows_over_time",
+        auth=BearerAuth(access_token),
+    )
+    response.raise_for_status()
+
+    data = response.json()["data"]
+    return data["inflowsOverTime"]
+
+
 class UserInfoPayload(TypedDict):
     email: str
     customReference: str
