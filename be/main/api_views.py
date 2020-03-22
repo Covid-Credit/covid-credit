@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.forms import ModelForm
 
 from integrations.credit_kudos.api import generate_connect_link, generate_customer_token
+from users.models import Waitlist
 from reports.models import IncomeReport
 
 
@@ -77,3 +78,17 @@ def generate_credit_kudos_link(request):
     )
 
     return JsonResponse({"connect_link": connect_link})
+
+
+@require_http_methods(["POST"])
+def join_waitlist(request):
+    data = json.loads(request.body)
+
+    email = data["email"]
+
+    try:
+        Waitlist.objects.create(email=email)
+    except Waitlist.IntegrityError:
+        return JsonResponse({}, status=400)
+
+    return JsonResponse({})

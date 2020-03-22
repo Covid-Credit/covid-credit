@@ -23,6 +23,7 @@ from . import task_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("complete/credit-kudos", views.complete_credit_kudos),
+    path("api/join-waitlist", api_views.join_waitlist),
     path("api/create-report", api_views.create_report),
     path("api/update-report", api_views.update_report),
     path("api/report/credit-kudos-link", api_views.generate_credit_kudos_link,),
