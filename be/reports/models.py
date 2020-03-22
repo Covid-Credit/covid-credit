@@ -23,6 +23,15 @@ class IncomeReport(models.Model):
 
     industry = models.TextField(blank=True)
 
+    cancelled_work = models.BooleanField(null=True)
+    future_work_cancelled = models.TextField(blank=True)
+    monthly_earnings = models.DecimalField(
+        null=True, blank=True, decimal_places=2, max_digits=9
+    )
+    future_earnings = models.DecimalField(
+        null=True, blank=True, decimal_places=2, max_digits=9
+    )
+
     credit_kudos_report_id = models.CharField(max_length=100, blank=True)
     file_location = models.TextField(blank=True)
 

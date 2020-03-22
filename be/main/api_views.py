@@ -24,6 +24,10 @@ class IncomeReportForm(ModelForm):
             "email",
             "date_of_birth",
             "industry",
+            "cancelled_work",
+            "future_work_cancelled",
+            "monthly_earnings",
+            "future_earnings",
         )
 
 
