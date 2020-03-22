@@ -16,6 +16,7 @@ import dj_database_url
 from dotenv import dotenv_values
 from typing import Optional
 from google.cloud import secretmanager
+import google
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +40,8 @@ def _load_secret_from_secret_manager(
 
     try:
         response = client.access_secret_version(name)
+    except google.api_core.exceptions.NotFound:
+        return default_value
     except ValueError:
         return default_value
 
