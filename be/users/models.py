@@ -85,3 +85,9 @@ class CreditKudosProfile(models.Model):
     refresh_token = models.TextField()
     scope = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Waitlist(models.Model):
+    email = models.EmailField(unique=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)

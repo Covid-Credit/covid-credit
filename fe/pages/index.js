@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Router from "next/router";
 import {
   Heading,
   Box,
-  List,
-  ListItem,
   Text,
   Button,
   Input,
   InputGroup,
-  InputAddon,
   InputRightElement,
   Flex,
   Link,
   Image,
+  FormControl,
+  FormErrorMessage,
 } from "@chakra-ui/core";
 import Header from "../components/Header";
 
 import PageTitle from "../components/PageTitle";
+import { postApi } from "../utils";
 
 const getStarted = () => {
   return Router.push({
@@ -48,6 +48,39 @@ const FlowSegment = props => {
 };
 
 export default function Home() {
+  const [state, setState] = useState({
+    loading: false,
+    saved: false,
+    value: "",
+    errorMessage: null,
+  });
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+
+    setState(state => ({
+      ...state,
+      loading: true,
+    }));
+
+    try {
+      await postApi("join-waitlist", { email: state.value });
+    } catch (error) {
+      setState(state => ({
+        ...state,
+        loading: false,
+        errorMessage: "Error saving your email",
+      }));
+      return;
+    }
+
+    setState(state => ({
+      ...state,
+      loading: false,
+      saved: true,
+    }));
+  };
+
   return (
     <>
       <Header />
@@ -77,22 +110,56 @@ export default function Home() {
             maxWidth="xl"
             margin="auto"
             textAlign={{ base: "left", sm: "center" }}
+            onSubmit={handleSubmit}
           >
-            <InputGroup size="lg">
-              <Input
-                variant="filled"
-                type="email"
-                size="lg"
-                placeholder="e-mail"
-                pr="2em"
-                borderRadius="lg"
-              />
-              <InputRightElement width="7.4em">
-                <Button variantColor="teal" size="md" borderRadius="lg">
-                  Join waitlist
-                </Button>
-              </InputRightElement>
-            </InputGroup>
+            {state.saved ? (
+              <Text
+                color="darkText"
+                textAlign="center"
+                width="100%"
+                minHeight="40px"
+                py={2}
+              >
+                You’re on the list{" "}
+                <span role="img" aria-label="thumbsup">
+                  👍
+                </span>
+              </Text>
+            ) : (
+              <FormControl isInvalid={!!state.errorMessage}>
+                <InputGroup size="lg">
+                  <Input
+                    variant="filled"
+                    type="email"
+                    size="lg"
+                    placeholder="e-mail"
+                    pr="2em"
+                    borderRadius="lg"
+                    value={state.value}
+                    required
+                    onChange={event => {
+                      const value = event.target.value;
+                      setState(state => ({
+                        ...state,
+                        value,
+                      }));
+                    }}
+                  />
+                  <InputRightElement width="7.4em">
+                    <Button
+                      variantColor="teal"
+                      size="md"
+                      borderRadius="lg"
+                      type="submit"
+                      isLoading={state.loading}
+                    >
+                      Join waitlist
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+                <FormErrorMessage>{state.errorMessage}</FormErrorMessage>
+              </FormControl>
+            )}
           </Box>
         </Box>
       </Box>
