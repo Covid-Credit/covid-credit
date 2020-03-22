@@ -169,7 +169,7 @@ def get_report(income_report: IncomeReport, report_id: int):
     access_token = get_access_token(income_report)
 
     response = requests.get(
-        "https://api.creditkudos.com/v3/reports/{report_id}", auth=BearerAuth(access_token),
+        f"https://api.creditkudos.com/v3/reports/{report_id}", auth=BearerAuth(access_token),
     )
     response.raise_for_status()
 
