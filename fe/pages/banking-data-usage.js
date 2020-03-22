@@ -14,13 +14,7 @@ export default function BankingDataUsage() {
   return (
     <>
       <Header />
-      <Box
-        as="form"
-        maxWidth="2xl"
-        margin="auto"
-        mt={{ base: "10", sm: "16" }}
-        px="5"
-      >
+      <Box maxWidth="2xl" margin="auto" mt={{ base: "10", sm: "16" }} px="5">
         <Text
           mb="5"
           fontSize="2xl"
