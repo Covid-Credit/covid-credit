@@ -1,6 +1,20 @@
 import React from "react";
 import Router from "next/router";
-import { Heading, Box, Text, Button, Flex, Link, Image } from "@chakra-ui/core";
+import {
+  Heading,
+  Box,
+  List,
+  ListItem,
+  Text,
+  Button,
+  Input,
+  InputGroup,
+  InputAddon,
+  InputRightElement,
+  Flex,
+  Link,
+  Image,
+} from "@chakra-ui/core";
 import Header from "../components/Header";
 
 import PageTitle from "../components/PageTitle";
@@ -38,38 +52,62 @@ export default function Home() {
     <>
       <Header />
       <Box
-        height={{ base: "sm", sm: "xl" }}
+        minHeight={{ base: "sm", sm: "xl" }}
         display="flex"
         flexDirection="column"
       >
         <Box margin="auto" maxWidth="4xl" mx="5" alignSelf="center">
           <PageTitle textAlign={{ base: "left", sm: "center" }} mb="6">
-            We’re helping self-employed workers get financial support due to
-            loss of income from Coronavirus
+            A proof of concept that helps self-employed workers demonstrate loss
+            of income to HMRC from Covid-19.
           </PageTitle>
           <Text
             fontSize={{ base: "md", sm: "xl" }}
             textAlign={{ base: "left", sm: "center" }}
             alignSelf="center"
             mb="6"
+            maxWidth="2xl"
+            margin="auto"
           >
-            This is an <span>early preview</span> to demonstrate that this
-            approach can be effective
+            This has yet to be given the green light by the UK Gov, join our
+            waitlist to be the first to know.
           </Text>
-          <Box textAlign={{ base: "left", sm: "center" }}>
-            <Button
-              variantColor="teal"
-              size="lg"
-              disabled={true}
-              onClick={getStarted}
-            >
-              Prove my income
-            </Button>
-            <Text>(available soon)</Text>
+          <Box
+            as="form"
+            maxWidth="xl"
+            margin="auto"
+            textAlign={{ base: "left", sm: "center" }}
+          >
+            <InputGroup size="lg">
+              <Input
+                variant="filled"
+                type="email"
+                size="lg"
+                placeholder="e-mail"
+                pr="2em"
+                borderRadius="lg"
+              />
+              <InputRightElement width="7.4em">
+                <Button variantColor="teal" size="md" borderRadius="lg">
+                  Join waitlist
+                </Button>
+              </InputRightElement>
+            </InputGroup>
           </Box>
         </Box>
       </Box>
       <Box>
+        <Text
+          as="h2"
+          textAlign="left"
+          pl="6"
+          fontSize="xl"
+          maxWidth="5xl"
+          margin="auto"
+          mb="6"
+        >
+          How it works
+        </Text>
         <Box
           display="flex"
           flexDirection={{ base: "column", md: "row" }}
@@ -100,86 +138,43 @@ export default function Home() {
             fontSize="2xl"
             fontWeight="bold"
             mb="5"
+            as="h2"
+            id="why"
           >
             Why are we doing this?
           </Text>
-          <Text mb="5">
+          <Text fontSize="lg" mb="5">
             More than 5 million self-employed and freelancers in the UK are not
             currently eligible to receive income support from the UK Government.
             This is largely due to the administrative complexities associated
             with self-employed income.
           </Text>
-          <Text>
-            Individuals that are self-employed can use Covid Credit to generate
-            a self-certification of income loss to send to HMRC
+          <Text fontSize="lg" mb="5">
+            In 48 hours a team from the fintech community got together and built
+            a working proof of concept. It allows a sole trader in the UK to
+            self certify that they have lost income and prove their previous 12
+            months of income by connecting to their bank account.
           </Text>
-        </Box>
-        <Box maxWidth="5xl" px="5" margin="auto" mt="10" mb="20">
-          <Text
-            letterSpacing={"-.07rem"}
-            fontSize="2xl"
-            fontWeight="bold"
-            mb="5"
-          >
-            FAQ
+          <Text fontSize="lg" mb="5">
+            This is possible due to the unique capabilities in the UK banking
+            system called "open banking". Recent transaction history provides
+            proof that income has been affected recently and by the crisis.
+            Whilst the proof of concept is not publicly available, it works, and
+            by creating something that works the hope is to demonstrate that
+            this service could help the 5 million self employed through the
+            COVID-19 crisis.
           </Text>
-          <Box mb="8">
-            <Text fontWeight="bold" mb="2">
-              What is Covid Credit?
-            </Text>
-            <Text>
-              This is a proof of concept to demonstrate how open banking data
-              could support freelancers in the COVID-19 economic crisis. The UK
-              Government announced an historic level of support for PAYE
-              employees who find themselves without work because of COVID-19
-              (furlonged employees) will receive up to 80% of their income or
-              £2,500 (whichever is lower).
-            </Text>
-          </Box>
-          <Box mb="8">
-            <Text fontWeight="bold" mb="2">
-              Why use open banking data?
-            </Text>
-            <Text>
-              By collecting historic banking data it is possible to prove
-              previous income to be eligible for income relief from the UK
-              Government. Our objective is to demonstrate this for the UK
-              Government in the hope this can help those in need in a time of
-              crisis.
-            </Text>
-          </Box>
-          <Box mb="8">
-            <Text fontWeight="bold" mb="2">
-              Who is it for?
-            </Text>
-            <Text>
-              In this proof of concept only sole traders are supported, limited
-              companies involve more complexity
-            </Text>
-          </Box>
-          <Box mb="8">
-            <Text fontWeight="bold" mb="2">
-              Is my data safe?
-            </Text>
-            <Text>
-              Your data is protected and only available to you. None of the
-              developers, team or any other party have access to your data. You
-              may share your PDF output with whomever you see fit.
-            </Text>
-          </Box>
-          <Box mb="8">
-            <Text fontWeight="bold" mb="2">
-              Will I get income support?
-            </Text>
-            <Text>
-              At this stage the UK Government has not announced any support for
-              freelancers or sole traders. An intended consequence of this proof
-              of concept is that HM Government may look to introduce this
-              service (or a service like it). Whilst you can access Universal
-              Credit, we would encourage you to write to your MP to make them
-              aware of this project.
-            </Text>
-          </Box>
+          <Text fontSize="lg" mb="5">
+            We urge the UK Government to collaborate with us, the Fintech
+            community, to help solve the rapidly evolving problem facing the UK
+            self employed community.
+          </Text>
+          <Text fontSize="lg" mb="5">
+            We are here and we are able. This service is ready to go live, but
+            we are waiting on input and support from the UK Government before we
+            do so. Sole traders could use Covid Credit’s proof of concept to
+            generate a self-certification of income loss to send to HMRC.
+          </Text>
         </Box>
       </Box>
       <Flex

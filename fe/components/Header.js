@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import { Box, Heading, Flex, Text, Button } from "@chakra-ui/core";
+import { Box, Heading, Flex, Text, Button, Link } from "@chakra-ui/core";
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -31,7 +31,9 @@ const Header = props => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
-          Covid Credit
+          <Link textDecoration="none" href="/">
+            Covid Credit
+          </Link>
         </Heading>
       </Flex>
 
@@ -55,8 +57,12 @@ const Header = props => {
         alignItems="center"
         flexGrow={1}
       >
-        {/* <MenuItems>About</MenuItems>
-        <MenuItems>I have a report code</MenuItems> */}
+        <MenuItems>
+          <Link href="#why">Why?</Link>
+        </MenuItems>
+        <MenuItems>
+          <Link href="/faq">FAQ</Link>
+        </MenuItems>
       </Box>
 
       <Box
@@ -64,7 +70,7 @@ const Header = props => {
         mt={{ base: 4, md: 0 }}
       >
         {/* <Button bg="transparent" border="1px" onClick={getStarted}>
-          Prove my Income
+          Join waitlist
         </Button> */}
       </Box>
     </Flex>
