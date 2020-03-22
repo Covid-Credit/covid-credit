@@ -55,8 +55,11 @@ export async function postApi(endpoint, body = {}, context = undefined) {
   const response = await fetch(`${getApiEndpoint()}/${endpoint}`, fetchOptions);
   if (response.status !== 200) {
     // eslint-disable-next-line
-    console.error(await response.text());
-    throw new Error("Request failed");
+    console.error("Request failed");
+    const data = await response.json();
+    const error = new Error("Request failed");
+    error.data = data;
+    throw error;
   }
 
   const data = await response.json();

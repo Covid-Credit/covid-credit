@@ -24,10 +24,10 @@ export const AffectedBusiness = props => {
   });
 
   const [formData, setFormData] = useState({
-    cancelledWork: null,
-    futureWorkCancelled: null,
-    monthlyEarnings: "",
-    futureEarnings: "",
+    cancelled_work: null,
+    future_work_cancelled: null,
+    monthly_earnings: "",
+    future_earnings: "",
   });
 
   const handleSubmit = async event => {
@@ -35,12 +35,12 @@ export const AffectedBusiness = props => {
 
     const errors = {};
 
-    if (!formData.cancelledWork) {
-      errors["cancelledWork"] = "Required field";
+    if (!formData.cancelled_work) {
+      errors["cancelled_work"] = ["Required field"];
     }
 
-    if (!formData.futureWorkCancelled) {
-      errors["futureWorkCancelled"] = "Required field";
+    if (!formData.future_work_cancelled) {
+      errors["future_work_cancelled"] = ["Required field"];
     }
 
     if (Object.keys(errors).length > 0) {
@@ -52,10 +52,10 @@ export const AffectedBusiness = props => {
     }
 
     const payload = {
-      cancelled_work: formData.cancelledWork === "no" ? false : true,
-      future_work_cancelled: formData.futureWorkCancelled,
-      monthly_earnings: formData.monthlyEarnings,
-      future_earnings: formData.futureEarnings,
+      cancelled_work: formData.cancelled_work === "no" ? false : true,
+      future_work_cancelled: formData.future_work_cancelled,
+      monthly_earnings: formData.monthly_earnings,
+      future_earnings: formData.future_earnings,
     };
 
     setState(state => ({
@@ -66,10 +66,13 @@ export const AffectedBusiness = props => {
     try {
       await postApi("/update-report", payload);
     } catch (error) {
+      const { errors } = error.data;
       setState(state => ({
         ...state,
-        errorMessage: "Failed to update",
+        loading: false,
+        errors,
       }));
+      return;
     }
     Router.push("/about-you");
   };
@@ -82,16 +85,16 @@ export const AffectedBusiness = props => {
         </Heading>
 
         <Box display="flex" justifyContent="space-between" mb="10">
-          <FormControl isRequired isInvalid={!!state.errors["cancelledWork"]}>
+          <FormControl isRequired isInvalid={!!state.errors["cancelled_work"]}>
             <FormLabel htmlFor="email">
               Have you had agreed work cancelled due to Covid-19?
             </FormLabel>
             <RadioButtonGroup
-              value={formData.cancelledWork}
+              value={formData.cancelled_work}
               onChange={val => {
                 setFormData(data => ({
                   ...data,
-                  cancelledWork: val,
+                  cancelled_work: val,
                 }));
               }}
               isInline
@@ -102,23 +105,25 @@ export const AffectedBusiness = props => {
               <CustomRadio value="no">No</CustomRadio>
               <CustomRadio value="yes">Yes</CustomRadio>
             </RadioButtonGroup>
-            <FormErrorMessage>{state.errors["cancelledWork"]}</FormErrorMessage>
+            <FormErrorMessage>
+              {state.errors["cancelled_work"]}
+            </FormErrorMessage>
           </FormControl>
         </Box>
         <Box display="flex" justifyContent="space-between" mb="10">
           <FormControl
             isRequired
-            isInvalid={!!state.errors["futureWorkCancelled"]}
+            isInvalid={!!state.errors["future_work_cancelled"]}
           >
             <FormLabel htmlFor="email">
               Are you expecting some or all of your future work to be cancelled?
             </FormLabel>
             <RadioButtonGroup
-              value={formData.futureWorkCancelled}
+              value={formData.future_work_cancelled}
               onChange={val => {
                 setFormData(data => ({
                   ...data,
-                  futureWorkCancelled: val,
+                  future_work_cancelled: val,
                 }));
               }}
               isInline
@@ -131,12 +136,15 @@ export const AffectedBusiness = props => {
               <CustomRadio value="all">All</CustomRadio>
             </RadioButtonGroup>
             <FormErrorMessage>
-              {state.errors["futureWorkCancelled"]}
+              {state.errors["future_work_cancelled"]}
             </FormErrorMessage>
           </FormControl>
         </Box>
         <Box display="flex" justifyContent="space-between" mb="10">
-          <FormControl isRequired isInvalid={!!state.errors["monthlyEarnings"]}>
+          <FormControl
+            isRequired
+            isInvalid={!!state.errors["monthly_earnings"]}
+          >
             <FormLabel htmlFor="email">
               How much on average do you usually earn per month?
             </FormLabel>
@@ -150,23 +158,23 @@ export const AffectedBusiness = props => {
                 type="number"
                 placeholder="e.g. £2800"
                 name="monthlyEarnings"
-                value={formData.monthlyEarnings}
+                value={formData.monthly_earnings}
                 onChange={event => {
                   const value = event.target.value;
                   setFormData(data => ({
                     ...data,
-                    monthlyEarnings: value,
+                    monthly_earnings: value,
                   }));
                 }}
               />
             </InputGroup>
             <FormErrorMessage>
-              {state.errors["monthlyEarnings"]}
+              {state.errors["monthly_earnings"]}
             </FormErrorMessage>
           </FormControl>
         </Box>
         <Box display="flex" justifyContent="space-between" mb="10">
-          <FormControl isRequired isInvalid={!!state.errors["futureEarnings"]}>
+          <FormControl isRequired isInvalid={!!state.errors["future_earnings"]}>
             <FormLabel htmlFor="email">
               How much on average do you expect to earn in the next few months?
             </FormLabel>
@@ -180,18 +188,18 @@ export const AffectedBusiness = props => {
                 type="number"
                 placeholder="e.g. £2800"
                 name="futureEarnings"
-                value={formData.futureEarnings}
+                value={formData.future_earnings}
                 onChange={event => {
                   const value = event.target.value;
                   setFormData(data => ({
                     ...data,
-                    futureEarnings: value,
+                    future_earnings: value,
                   }));
                 }}
               />
             </InputGroup>
             <FormErrorMessage>
-              {state.errors["futureEarnings"]}
+              {state.errors["future_earnings"]}
             </FormErrorMessage>
           </FormControl>
         </Box>
