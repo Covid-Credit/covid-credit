@@ -3,6 +3,12 @@
 \usepackage[left=1.5cm,right=1.5cm,bottom=1.5cm,top=1.5cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{helvet}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+}
 
 \setlength{\parindent}{0cm}
 
@@ -13,6 +19,7 @@
 
 \fontfamily{phv}\selectfont
 
+\author{\href{\VAR{link_self}}{\VAR{reference_code}}}
 \maketitle
 
 I, \textbf{\VAR{name}} of \textbf{4 Privet Drive, Surrey, F00 8AR}, do solemnly and sincerely declare that: 

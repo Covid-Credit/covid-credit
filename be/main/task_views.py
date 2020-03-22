@@ -69,6 +69,8 @@ def create_pdf(request):
       "income": income,
       "today": datetime.now().strftime("%d %b %Y"),
       "credit_transactions": credit_transactions,
+      "reference_code": income_report.reference_code,
+      "link_self": "https://covidcredit.uk/report/{income_report.reference_code}",
     }
     pdf = _build_pdf(context)
     storage_client = storage.Client()
