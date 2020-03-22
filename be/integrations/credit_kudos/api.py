@@ -161,10 +161,7 @@ def get_latest_report(income_report: IncomeReport):
     if len(reports) == 0:
         raise Exception("No reports found")
 
-    latest_report = next(
-        (report for report in reports if report["status"] == "complete")
-    )
-
+    latest_report = reports[0]
     return latest_report
 
 

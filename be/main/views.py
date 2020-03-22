@@ -18,6 +18,7 @@ from reports.models import IncomeReport
 from integrations.credit_kudos.api import (
     exchange_authorisation_code,
     save_access_token,
+    get_latest_report,
 )
 
 
@@ -47,6 +48,10 @@ def complete_credit_kudos(request):
 
     with transaction.atomic():
         save_access_token(income_report, oauth_payload=oauth_payload)
+
+    latest_report = get_latest_report(income_report)
+    income_report.credit_kudos_report_id = latest_report["id"]
+    income_report.save()
 
     next_path = request.GET.get("next", f"report/{income_report.reference_code}/view")
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
