@@ -74,6 +74,6 @@ def complete_credit_kudos(request):
 
     perform_pdf_task(income_report)
 
-    next_path = request.GET.get("next", f"report/{income_report.reference_code}/view")
+    next_path = request.GET.get("next", f"report/{income_report.reference_code}")
     return HttpResponseRedirect(f"{settings.BASE_URL}/{next_path}")
 

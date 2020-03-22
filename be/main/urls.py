@@ -26,6 +26,7 @@ urlpatterns = [
     path("api/join-waitlist", api_views.join_waitlist),
     path("api/create-report", api_views.create_report),
     path("api/update-report", api_views.update_report),
+    path("api/report/<str:report_reference_code>", api_views.get_report),
     path("api/report/credit-kudos-link", api_views.generate_credit_kudos_link,),
     path("_tasks/create-pdf", task_views.create_pdf),
 ]
