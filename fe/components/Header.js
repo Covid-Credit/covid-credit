@@ -30,7 +30,7 @@ const Header = props => {
       {...props}
     >
       <Flex align="center" mr={5}>
-        <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
+        <Heading as="h1" mr={5} size="lg" letterSpacing={"-.1rem"}>
           <Link textDecoration="none" href="/">
             Covid Credit
           </Link>
@@ -58,10 +58,13 @@ const Header = props => {
         flexGrow={1}
       >
         <MenuItems>
-          <Link href="#why">Why?</Link>
+          <Link href="/#why">Why</Link>
         </MenuItems>
         <MenuItems>
           <Link href="/faq">FAQ</Link>
+        </MenuItems>
+        <MenuItems>
+          <Link href="/#further">Further help</Link>
         </MenuItems>
       </Box>
 
@@ -69,9 +72,9 @@ const Header = props => {
         display={{ base: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        {/* <Button bg="transparent" border="1px" onClick={getStarted}>
-          Join waitlist
-        </Button> */}
+        {/* <Button as="Link" bg="transparent" border="1px" onClick={getStarted}> */}
+        <Link href="mailto:covidcredit@fronted.rent">Get in touch</Link>
+        {/* </Button> */}
       </Box>
     </Flex>
   );

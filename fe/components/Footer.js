@@ -47,9 +47,9 @@ const Footer = props => {
         alignItems="center"
         flexGrow={1}
       >
-        <Box>
+        <Box margin="auto" maxWidth="5xl">
           <Flex direction={{ base: "column", md: "row" }}>
-            <Text mr="10" mb="2">
+            <Text pr="10" mb="2">
               Covid Credit was designed and created by the UK Fintech Community.
               With input from:
             </Text>
@@ -69,7 +69,7 @@ const Footer = props => {
                   alt="Fronted"
                 />
               </Link>
-              <Link
+              {/* <Link
                 mr="4"
                 display="inline-block"
                 display="flex"
@@ -83,7 +83,7 @@ const Footer = props => {
                   src="/img/Coconut.png"
                   alt="Coconut"
                 />
-              </Link>
+              </Link> */}
               <Link
                 mr="4"
                 display="inline-block"
