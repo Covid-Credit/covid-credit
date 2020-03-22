@@ -20,6 +20,11 @@ class IncomeReport(models.Model):
     full_name = models.TextField(blank=True)
     email = models.TextField(blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
+    address = models.TextField(blank=True)
+
+    self_employed = models.BooleanField(null=True)
+    ltd_company = models.BooleanField(null=True)
+    employed_since = models.DateField(null=True)
 
     industry = models.TextField(blank=True)
 
@@ -31,6 +36,9 @@ class IncomeReport(models.Model):
     future_earnings = models.DecimalField(
         null=True, blank=True, decimal_places=2, max_digits=9
     )
+
+    national_insurance_number = models.CharField(max_length=9, blank=True)
+    unique_tax_reference = models.CharField(max_length=12, blank=True)
 
     credit_kudos_report_id = models.CharField(max_length=100, blank=True)
     file_location = models.TextField(blank=True)

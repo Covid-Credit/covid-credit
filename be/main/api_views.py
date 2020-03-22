@@ -25,11 +25,17 @@ class IncomeReportForm(ModelForm):
             "full_name",
             "email",
             "date_of_birth",
+            "address",
+            "self_employed",
+            "ltd_company",
+            "employed_since",
             "industry",
             "cancelled_work",
             "future_work_cancelled",
             "monthly_earnings",
             "future_earnings",
+            "national_insurance_number",
+            "unique_tax_reference",
         )
 
 
