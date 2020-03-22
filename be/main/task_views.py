@@ -23,6 +23,7 @@ from integrations.credit_kudos.api import (
     get_access_token,
     get_inflows_over_time,
     get_latest_report,
+    get_report,
     get_credit_transactions,
 )
 from reports.models import IncomeReport
@@ -65,8 +66,10 @@ def create_pdf(request):
       return HttpResponse(status=422)
 
     report_id = report["id"]
+    # Refetch report with summary
+    report = get_report(income_report, report_id)
 
-    income = report["summary"]["income"]["incomeWithBankTransfers"]["predictedMonthlyAmount"]["value"]
+    income = report["summary"]["incomeWithBankTransfers"]["predictedMonthlyAmount"]["value"]
     credit_transactions = get_credit_transactions(income_report, report_id)
 
     context = {
