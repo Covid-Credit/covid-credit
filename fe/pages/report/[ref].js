@@ -66,7 +66,7 @@ export default function ViewReport({ data, ref }) {
                 Share the above report
               </Text>
               <InputGroup size="md">
-                <Input variant="filled" value={data.report_file} readOnly pr="2em" />
+                <Input variant="filled" value={reportLink} readOnly pr="2em" />
                 <InputRightElement width="4.5em">
                   <Button onClick={onCopy} variantColor="teal" size="sm">
                     {hasCopied ? "Copied" : "Copy"}
