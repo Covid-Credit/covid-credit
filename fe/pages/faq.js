@@ -16,6 +16,7 @@ import {
   Image,
 } from "@chakra-ui/core";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 import PageTitle from "../components/PageTitle";
 
@@ -161,6 +162,7 @@ export default function FAQ() {
           </Text>
         </Box>
       </Box>
+      <Footer />
     </>
   );
 }
