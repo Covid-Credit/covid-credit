@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -8,9 +8,35 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/core";
+
 import HeaderProgress from "../components/HeaderProgress";
 
+import { postApi, getApi } from "../utils";
+
+async function getCreditKudosLink() {
+  // create report first (if it doesn't exist)
+  await postApi("create-report", {});
+
+  const data = await getApi("report/credit-kudos-link");
+  return data.connect_link;
+}
+
 export default function BankingDataUsage() {
+  const [state, setState] = useState({
+    loading: true,
+    creditKudosLink: null,
+  });
+
+  useEffect(() => {
+    getCreditKudosLink().then(link => {
+      setState(state => ({
+        ...state,
+        loading: false,
+        creditKudosLink: link,
+      }));
+    });
+  }, []);
+
   return (
     <>
       <HeaderProgress progress={60} />
@@ -127,8 +153,15 @@ export default function BankingDataUsage() {
             </Flex>
           </Flex>
         </Box>
-        <Flex justifyContent="flex-end">
-          <Button variantColor="teal" size="lg" mb={10}>
+        <Flex justifyContent="center">
+          <Button
+            variantColor="teal"
+            size="lg"
+            mb={10}
+            as="a"
+            isLoading={state.loading}
+            href={state.creditKudosLink}
+          >
             Connect using Credit Kudos
           </Button>
         </Flex>
