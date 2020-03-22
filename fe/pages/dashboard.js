@@ -2,26 +2,18 @@ import React from "react";
 import {
   Box,
   Text,
-  List,
   Stack,
   Input,
   InputGroup,
   InputRightElement,
-  ListItem,
-  ListIcon,
   Button,
-  Flex,
+  useClipboard,
 } from "@chakra-ui/core";
 import Header from "../components/Header";
 
 export default function BankingDataUsage() {
-  const state = {
-    shareCode: "HCSU472",
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(state.shareCode);
-  };
+  const [shareCode, setShareCode] = React.useState("HCSU472");
+  const { onCopy, hasCopied } = useClipboard(shareCode);
 
   return (
     <>
@@ -65,10 +57,10 @@ export default function BankingDataUsage() {
               Share the above report
             </Text>
             <InputGroup size="md">
-              <Input variant="filled" value={state.shareCode} pr="2em" />
+              <Input variant="filled" value={shareCode} pr="2em" />
               <InputRightElement width="4.5em">
-                <Button onClick={copyToClipboard} variantColor="teal" size="sm">
-                  Copy
+                <Button onClick={onCopy} variantColor="teal" size="sm">
+                  {hasCopied ? "Copied" : "Copy"}
                 </Button>
               </InputRightElement>
             </InputGroup>
