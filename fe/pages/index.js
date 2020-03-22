@@ -10,6 +10,7 @@ import {
   InputRightElement,
   Flex,
   Link,
+  Stack,
   Image,
   FormControl,
   FormErrorMessage,
@@ -94,8 +95,16 @@ export default function Home() {
       >
         <Box margin="auto" maxWidth="4xl" mx="5" py="5" alignSelf="center">
           <PageTitle textAlign={{ base: "left", sm: "center" }} mb="6">
-            A proof of concept that helps self-employed workers demonstrate loss
-            of income to HMRC from Covid-19.
+            A{" "}
+            <span
+              css={{
+                backgroundColor: "yellow",
+              }}
+            >
+              proof of concept
+            </span>{" "}
+            helping self-employed workers demonstrate loss of income from
+            COVID-19 to HMRC.
           </PageTitle>
           <Text
             fontSize={{ base: "md", sm: "xl" }}
@@ -167,7 +176,7 @@ export default function Home() {
         </Box>
       </Box>
       <Box margin="auto" maxWidth="5xl" my="10">
-        <YouTube id="I7F8qC2RVVQ" />
+        <YouTube id="8NfJg0vu-ug" />
       </Box>
       <Box>
         <Box
@@ -183,7 +192,7 @@ export default function Home() {
           <FlowSegment number="1">Tell us how you're affected</FlowSegment>
           <FlowSegment number="2">Fill in your company details</FlowSegment>
           <FlowSegment number="3">Link your primary bank account</FlowSegment>
-          <FlowSegment number="4">Recieve and send your report</FlowSegment>
+          <FlowSegment number="4">Receive and send your report</FlowSegment>
         </Box>
       </Box>
       <Box>
@@ -206,15 +215,16 @@ export default function Home() {
             Why are we doing this?
           </Text>
           <Text fontSize="lg" mb="5">
-            More than 5 million self-employed and freelancers in the UK are not
-            currently eligible to receive income support from the UK Government.
-            This is largely due to the administrative complexities associated
-            with self-employed income.
+            In 48 hours a team from the fintech community assembled and built a
+            working proof of concept. Covid Credit allows a sole trader in the
+            UK to generate a self-certification of income loss to send to HMRC
+            by connecting to their bank account and proving their previous 12
+            months of income.
           </Text>
           <Text fontSize="lg" mb="5">
-            In 48 hours a team from the fintech community got together and built
+            In 48 hours a team from the Fintech community got together and built
             a working proof of concept. It allows a sole trader in the UK to
-            self certify that they have lost income and prove their previous 12
+            self-certify that they have lost income and prove their previous 12
             months of income by connecting to their bank account.
           </Text>
           <Text fontSize="lg" mb="5">
@@ -237,6 +247,148 @@ export default function Home() {
             do so. Sole traders could use Covid Credit’s proof of concept to
             generate a self-certification of income loss to send to HMRC.
           </Text>
+        </Box>
+        <Box
+          maxWidth="5xl"
+          px="5"
+          margin="auto"
+          mt="10"
+          pb="10"
+          borderBottom="1px solid #EEE"
+        >
+          <Text
+            letterSpacing={"-.07rem"}
+            fontSize="2xl"
+            fontWeight="bold"
+            mb="5"
+            as="h2"
+            id="further"
+          >
+            Where else can i get help?
+          </Text>
+          <Stack spacing={5}>
+            <Box mb="4">
+              <Link
+                href="https://www.gov.uk/self-employment-and-universal-credit"
+                textDecoration="underline"
+                color="teal"
+                isExternal
+                display="inline-block"
+                fontWeight="bold"
+                fontSize="2xl"
+                mb="2"
+              >
+                Self Employment & Universal Credit
+              </Link>
+
+              <Text>
+                Universal Credit is a monthly payment to help with your living
+                costs. You may be able to get it if you’re on a low income or
+                out of work.
+              </Text>
+            </Box>
+            <Box mb="4">
+              <Link
+                href="https://www.gov.uk/employment-support-allowance"
+                textDecoration="underline"
+                isExternal
+                color="teal"
+                display="inline-block"
+                fontWeight="bold"
+                fontSize="2xl"
+                mb="2"
+              >
+                Employment & Support Allowance
+              </Link>
+
+              <Text>
+                You can apply for Employment and Support Allowance (ESA) if you
+                have a disability or health condition that affects how much you
+                can work.
+              </Text>
+            </Box>
+            <Box mb="4">
+              <Link
+                href="https://smallbusiness.co.uk/how-do-i-get-the-government-3000-coronavirus-grant-2549866/"
+                textDecoration="underline"
+                isExternal
+                color="teal"
+                display="inline-block"
+                fontWeight="bold"
+                fontSize="2xl"
+                mb="2"
+              >
+                Covid-19 Small Business Government Grant
+              </Link>
+
+              <Text>
+                The Treasury has announced a £3,000 grant for businesses that do
+                not pay business rates to help them survive the coronavirus
+                pandemic – how do you apply for it?
+              </Text>
+            </Box>
+            <Box mb="4">
+              <Link
+                href="https://smallbusiness.co.uk/how-do-i-apply-for-a-coronavirus-business-interruption-loan-2549863/"
+                textDecoration="underline"
+                isExternal
+                color="teal"
+                display="inline-block"
+                fontWeight="bold"
+                fontSize="2xl"
+                mb="2"
+              >
+                Coronavirus Business Interruption Loan
+              </Link>
+
+              <Text>
+                How to apply for the new Coronavirus Business Interruption Loan
+                scheme to help small business survive during the COVID-19
+                outbreak
+              </Text>
+            </Box>
+            <Box mb="4">
+              <Link
+                href="https://www.citizensadvice.org.uk/benefits/help-if-on-a-low-income/if-youre-struggling-with-living-costs/"
+                textDecoration="underline"
+                isExternal
+                color="teal"
+                display="inline-block"
+                fontWeight="bold"
+                fontSize="2xl"
+                mb="2"
+              >
+                Citizen’s Advice
+              </Link>
+
+              <Text>
+                If you don’t have enough to live on, you might be able to get
+                help from your local council or an interest-free loan from the
+                government.
+              </Text>
+            </Box>
+            <Box mb="4">
+              <Link
+                href="https://www.stepchange.org/debt-info/emergency-funding.aspx"
+                textDecoration="underline"
+                isExternal
+                color="teal"
+                display="inline-block"
+                fontWeight="bold"
+                fontSize="2xl"
+                mb="2"
+              >
+                Emergency Funding
+              </Link>
+
+              <Text>
+                A cash crisis could be caused by anything from delayed benefits
+                to job loss that leaves you severely short of money that you
+                need for essentials like food. If you find yourself in this
+                situation help is available.
+              </Text>
+            </Box>
+          </Stack>
         </Box>
       </Box>
       <Footer />

@@ -44,7 +44,7 @@ export default function FAQ() {
             data could support freelancers in the COVID-19 economic crisis. The
             UK Government announced an historic level of support for PAYE
             employees who find themselves without work because of COVID-19
-            (furlonged employees) will receive up to 80% of their income or
+            (furloughed employees) will receive up to 80% of their income or
             £2,500 (whichever is lower). This support does not cover millions of
             self-employed workers in the UK that make significant contributions
             to the UK economy.
@@ -131,7 +131,9 @@ export default function FAQ() {
               Did indeed make self employed income as a sole trader (e.g.
               wedding photography)
             </ListItem>
-            <ListItem mb={2}>Is no longer able to perform this work</ListItem>
+            <ListItem mb={2}>
+              Is no longer able to perform this work due to COVID-19
+            </ListItem>
           </List>
 
           <Text mb={2}>
@@ -157,8 +159,14 @@ export default function FAQ() {
           <Text>
             At this stage it’s unclear. The team is working to get something in
             front of the right decision makers asap. However there are no
-            guarantees. If you can support in any way please get in touch
-            (contact us link)
+            guarantees. If you can support in any way please get in touch at{" "}
+            <Link
+              color="teal.500"
+              textDecoration="underline"
+              href="mailto:covidcredit@fronted.rent"
+            >
+              covidcredit@fronted.rent
+            </Link>
           </Text>
         </Box>
       </Box>

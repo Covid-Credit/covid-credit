@@ -69,7 +69,7 @@ const Footer = props => {
                   alt="Fronted"
                 />
               </Link>
-              <Link
+              {/* <Link
                 mr="4"
                 display="inline-block"
                 display="flex"
@@ -83,7 +83,7 @@ const Footer = props => {
                   src="/img/Coconut.png"
                   alt="Coconut"
                 />
-              </Link>
+              </Link> */}
               <Link
                 mr="4"
                 display="inline-block"
