@@ -22,6 +22,7 @@ from integrations.credit_kudos.api import (
     get_access_token,
     get_inflows_over_time,
     get_latest_report,
+    get_credit_transactions,
 )
 from reports.models import IncomeReport
 
@@ -55,7 +56,10 @@ def create_pdf(request):
       # Report not ready yet.
       return HttpResponse(status=422)
 
+    report_id = report["id"]
+
     income = report["summary"]["income"]["incomeWithBankTransfers"]["predictedMonthlyAmount"]["value"]
+    credit_transactions = get_credit_transactions(income_report, report_id)
 
     context = {
       "logo_path": os.path.join(settings.BASE_DIR, "static/images/creditkudos.png"),
@@ -64,6 +68,7 @@ def create_pdf(request):
       "dob": income_report.date_of_birth,
       "income": income,
       "today": datetime.now().strftime("%d %b %Y"),
+      "credit_transactions": credit_transactions,
     }
     pdf = _build_pdf(context)
     storage_client = storage.Client()

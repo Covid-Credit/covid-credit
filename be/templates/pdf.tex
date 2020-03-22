@@ -46,5 +46,9 @@ Declared by \textbf{\VAR{name}} at \textbf{4 Privet Drive, Surrey, F00 8AR} on \
 
 \section{Evidence}
 
+\BLOCK{for txn in credit_transactions}
+  \VAR{txn.booked_at} \VAR{txn.description} \textsterling\VAR{txn.amount.value}
+\BLOCK{endfor}
+
 
 \end{document}
