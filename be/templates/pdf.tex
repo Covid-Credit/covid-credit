@@ -46,9 +46,18 @@ Declared by \textbf{\VAR{name}} at \textbf{4 Privet Drive, Surrey, F00 8AR} on \
 
 \section{Evidence}
 
+\begin{center}
+\begin{tabular}{ |c|c|c| }
+\hline
+\textbf{Date} & \textbf{Description} & \textbf{Amount} \\
+\hline
 \BLOCK{for txn in credit_transactions}
-  \VAR{txn.booked_at} \VAR{txn.description} \textsterling\VAR{txn.amount.value}
+  \VAR{txn.bookedAt} & \VAR{txn.description} & \textsterling\VAR{txn.amount.value} \\
+  \hline
 \BLOCK{endfor}
+\hline
+\end{tabular}
+\end{center}
 
 
 \end{document}
