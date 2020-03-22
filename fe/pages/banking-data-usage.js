@@ -23,7 +23,7 @@ export default function BankingDataUsage() {
           letterSpacing={"-.1rem"}
           pr="2"
         >
-          Let's connect your primary bank account
+          Connect your primary bank account
         </Text>
         <Text mb="5">
           We use open banking data through Credit Kudos to prove your income,
@@ -123,9 +123,11 @@ export default function BankingDataUsage() {
             </Flex>
           </Flex>
         </Box>
-        <Button variantColor="teal" size="lg" disabled={true}>
-          Connect using Credit Kudos
-        </Button>
+        <Flex justifyContent="flex-end">
+          <Button variantColor="teal" size="lg">
+            Connect using Credit Kudos
+          </Button>
+        </Flex>
       </Box>
     </>
   );
