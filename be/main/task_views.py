@@ -93,7 +93,7 @@ def create_pdf(request):
       "reference_code": income_report.reference_code,
       "link_self": "https://covidcredit.uk/report/{income_report.reference_code}",
 
-      "national_insurance": income_report.national_insurance,
+      "national_insurance": income_report.national_insurance_number,
       "unique_tax_reference": income_report.unique_tax_reference,
       "employment_type": _get_employment_type(income_report),
       "industry": income_report.industry,
