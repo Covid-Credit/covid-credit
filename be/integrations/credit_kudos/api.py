@@ -227,7 +227,7 @@ def get_credit_transactions(income_report: IncomeReport, report_id: int):
             auth=BearerAuth(access_token),
         )
         response.raise_for_status()
-        credit_transactions += response["data"]["transactions"]
+        credit_transactions += response.json()["data"]["transactions"]
 
     return credit_transactions
 
