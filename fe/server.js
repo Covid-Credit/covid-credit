@@ -15,7 +15,7 @@ app.prepare().then(() => {
 
   // Google signin urls
   server.use(
-    ["/api/", "/complete/credit-kudos"],
+    ["/api/", "/complete/credit-kudos", "/_tasks/"],
     createProxyMiddleware({
       target: BACKEND_DOMAIN,
       changeOrigin: true,
