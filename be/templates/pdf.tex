@@ -62,7 +62,7 @@ Declared by \textbf{\VAR{name}} at \textbf{4 Privet Drive, Surrey, F00 8AR} on \
 \hline
 \textbf{Date} & \textbf{Description} & \textbf{Amount} \\
 \hline
-\BLOCK{for txn in credit_transactions}
+\BLOCK{for txn in credit_transactions | sort(attribute="bookedAt", reverse=true)}
   \VAR{txn.bookedAt} & \VAR{txn.description} & \textsterling\VAR{txn.amount.value} \\
   \hline
 \BLOCK{endfor}
