@@ -78,9 +78,9 @@ export const AffectedBusiness = props => {
   };
 
   return (
-    <Wrapper onSubmit={handleSubmit}>
+    <Wrapper onSubmit={handleSubmit} progress={50}>
       <Box mb={8}>
-        <Heading as="h2" fontSize="4xl" margin="30px 0 40px">
+        <Heading as="h2" fontSize="2xl" margin="30px 0 40px">
           How has Covid-19 affected your business
         </Heading>
 
