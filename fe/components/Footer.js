@@ -116,6 +116,24 @@ const Footer = props => {
           </Flex>
         </Box>
       </Box>
+      <Box mr="24" pt="5" mb="5" margin="auto">
+        <Stack spacing="5" isInline>
+          <Text>
+            <Link
+              href="/privacy-policy"
+              textDecoration="underline"
+              color="teal"
+            >
+              Privacy Policy
+            </Link>
+          </Text>
+          <Text>
+            <Link href="/terms-of-use" textDecoration="underline" color="teal">
+              Terms of Use
+            </Link>
+          </Text>
+        </Stack>
+      </Box>
     </Flex>
   );
 };
