@@ -157,7 +157,7 @@ export default function Home() {
                       }));
                     }}
                   />
-                  <InputRightElement width="7.4em">
+                  <InputRightElement width="5.8em">
                     <Button
                       variantColor="teal"
                       size="md"
@@ -165,7 +165,7 @@ export default function Home() {
                       type="submit"
                       isLoading={state.loading}
                     >
-                      Join waitlist
+                      Register
                     </Button>
                   </InputRightElement>
                 </InputGroup>
