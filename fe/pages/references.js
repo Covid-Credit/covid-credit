@@ -70,9 +70,9 @@ export const References = props => {
   };
 
   return (
-    <Wrapper onSubmit={handleSubmit}>
+    <Wrapper onSubmit={handleSubmit} progress={100}>
       <Box>
-        <Heading as="h2" fontSize="4xl" margin="30px 0 40px">
+        <Heading as="h2" fontSize="2xl" margin="30px 0 40px">
           Your References
         </Heading>
 

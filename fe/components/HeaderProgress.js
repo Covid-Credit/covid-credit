@@ -1,5 +1,6 @@
 import React from "react";
 import Router from "next/router";
+import Link from "next/link";
 import {
   Box,
   Heading,
@@ -10,8 +11,16 @@ import {
   Progress,
 } from "@chakra-ui/core";
 
+const MenuItems = ({ children }) => (
+  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
+    {children}
+  </Text>
+);
+
 const Header = props => {
   const [progress, setProgress] = React.useState(props.progress || 40);
+  const [show, setShow] = React.useState(false);
+  const handleToggle = () => setShow(!show);
 
   return (
     <Flex

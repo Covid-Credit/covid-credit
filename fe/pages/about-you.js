@@ -82,9 +82,9 @@ export const AboutYou = props => {
   };
 
   return (
-    <Wrapper onSubmit={handleSubmit}>
+    <Wrapper onSubmit={handleSubmit} progress={75}>
       <Box>
-        <Heading as="h2" fontSize="4xl" margin="30px 0 40px">
+        <Heading as="h2" fontSize="2xl" margin="30px 0 40px">
           About You
         </Heading>
 
