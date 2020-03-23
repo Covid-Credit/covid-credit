@@ -91,7 +91,7 @@ def create_pdf(request):
       "today": datetime.now().strftime("%d %b %Y"),
       "credit_transactions": credit_transactions,
       "reference_code": income_report.reference_code,
-      "link_self": "https://covidcredit.uk/report/{income_report.reference_code}",
+      "link_self": f"https://covidcredit.uk/report/{income_report.reference_code}",
 
       "national_insurance": income_report.national_insurance_number,
       "unique_tax_reference": income_report.unique_tax_reference,
