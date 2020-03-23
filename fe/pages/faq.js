@@ -154,6 +154,19 @@ export default function FAQ() {
         </Box>
         <Box mb="8">
           <Text fontWeight="bold" as="h2" fontSize="lg" mb="2">
+            What is a furloughed worker?
+          </Text>
+          <Text>
+            A furloughed worker is a full time employee of a company whose
+            employment by the company has been discontinued. Furloughed workers
+            are entitled to 80% of their salary to be granted by the government
+            (up to £2,500) during the coronavirus crisis. Currently,
+            self-employed individuals do not qualify for the furloughed worker
+            relief offered by the government.
+          </Text>
+        </Box>
+        <Box mb="8">
+          <Text fontWeight="bold" as="h2" fontSize="lg" mb="2">
             When will this be live?
           </Text>
           <Text>
