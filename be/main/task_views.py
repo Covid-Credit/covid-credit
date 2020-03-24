@@ -101,6 +101,8 @@ def create_pdf(request):
     report_id = report["id"]
     income = report["summary"]["incomeWithBankTransfers"]["predictedMonthlyAmount"]["value"]
     credit_transactions = get_credit_transactions(income_report, report_id)
+    # Filter pending transactions.
+    credit_transactions = [t for t in credit_transactions if t["bookedAt"]]
 
     context = {
       "logo_path": os.path.join(settings.BASE_DIR, "static/images/creditkudos.png"),
