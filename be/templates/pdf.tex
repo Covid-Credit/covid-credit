@@ -4,8 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{helvet}
 \usepackage{hyperref}
-\usepackage{longtable}
 \usepackage{sectsty}
+\usepackage{xltabular}
 
 \hypersetup{
   colorlinks=true,
@@ -59,7 +59,7 @@ Declared by \textbf{\VAR{name}} at \textbf{\VAR{address}} on \textbf{\VAR{today}
 
 \section*{Evidence}
 
-\begin{longtable}{ |c|l|r| }
+\begin{xltabular}{\textwidth}{|l|X|r|}
 \hline
 \textbf{Date} & \textbf{Description} & \textbf{Amount} \\
 \hline
@@ -68,7 +68,7 @@ Declared by \textbf{\VAR{name}} at \textbf{\VAR{address}} on \textbf{\VAR{today}
   \hline
 \BLOCK{endfor}
 \hline
-\end{longtable}
+\end{xltabular}
 \end{center}
 
 
