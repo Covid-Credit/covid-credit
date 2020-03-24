@@ -4,6 +4,7 @@ from datetime import datetime
 import dateutil.parser
 import io
 import logging
+import re
 import uuid
 import os
 
@@ -36,12 +37,32 @@ def _parse_iso601(value: str) -> datetime:
 def _format_date(value: datetime) -> str:
     return value.strftime('%Y-%m-%d')
 
+def _escape(text: str) -> str:
+    conv = {
+        '&': r'\&',
+        '%': r'\%',
+        '$': r'\$',
+        '#': r'\#',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\^{}',
+        '\\': r'\textbackslash{}',
+        '<': r'\textless{}',
+        '>': r'\textgreater{}',
+    }
+    regex = re.compile('|'.join(re.escape(str(key)) for key in sorted(conv.keys(), key = lambda item: - len(item))))
+    return regex.sub(lambda match: conv[match.group()], text)
+
+
 def _build_pdf(context) -> bytes:
     env = make_env(
       loader=FileSystemLoader(os.path.join(settings.BASE_DIR, 'templates')),
     )
     env.filters['parse_iso8601'] = _parse_iso601
     env.filters['format_date'] = _format_date
+    env.filters['escape'] = _escape
 
     template = env.get_template("pdf.tex")
     pdf = build_pdf(template.render(context), builder="xelatexmk")
