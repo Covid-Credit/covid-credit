@@ -176,7 +176,8 @@ export const AffectedBusiness = props => {
         <Box display="flex" justifyContent="space-between" mb="10">
           <FormControl isRequired isInvalid={!!state.errors["future_earnings"]}>
             <FormLabel htmlFor="email">
-              How much on average do you expect to earn in the next few months?
+              How much do you expect to earn per month in the near future
+              (without income support) as a result of COVID-19?
             </FormLabel>
             <InputGroup>
               <InputLeftElement
